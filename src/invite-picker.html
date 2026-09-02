@@ -126,9 +126,20 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',s
 .c2-deco.mush4{left:34px;top:588px;width:16px;--tilt:11deg;--bd:6.7s;--bdl:-1.3s;opacity:.75}
 
 @keyframes c2bob{from{translate:0 0;rotate:-2.5deg}to{translate:0 -6px;rotate:2.5deg}}
-.c2-div{flex:none;width:186px;display:block;overflow:visible}
-.c2-div.top{margin:14px 0 6px}
-.c2-div.bot{margin:8px 0 0}
+.c2-divwrap{position:relative;flex:none;width:186px}
+.c2-divwrap.top{margin:14px 0 6px}
+.c2-divwrap.bot{margin:8px 0 0}
+.c2-sprite{position:absolute;left:0;bottom:12px;width:21px;overflow:visible;z-index:2;
+  animation:c2walk var(--wd,11s) linear infinite;animation-delay:var(--wdl,0s)}
+.c2-sprite .hop{transform-box:fill-box;transform-origin:50% 100%;animation:c2hop .48s ease-in-out infinite alternate}
+@keyframes c2walk{
+  0%{translate:-16px 0;scale:1 1}
+  47%{translate:174px 0;scale:1 1}
+  50%{translate:174px 0;scale:-1 1}
+  97%{translate:-16px 0;scale:-1 1}
+  100%{translate:-16px 0;scale:1 1}}
+@keyframes c2hop{from{translate:0 0}to{translate:0 -2.6px}}
+.c2-div{display:block;width:100%;overflow:visible}
 .c2-div .sprig{transform-box:fill-box;transform-origin:50% 50%;animation:c2divsway 5s ease-in-out infinite alternate}
 @keyframes c2divsway{from{rotate:-4deg}to{rotate:4deg}}
 /* 版面 B：照片放在標題與稱謂中間 */
@@ -371,7 +382,7 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
           <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
           <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
         </dl>
-        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+        <a class="map" href="https://maps.app.goo.gl/L2KKskiBC6GGvu8n7" target="_blank" rel="noopener">查看地圖</a>
       </div>
     </div>
   </div>
@@ -440,20 +451,20 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
         <p class="eyebrow">Invitation</p>
         <h2>畇安 週歲</h2>
         <p class="c2-sub">First Birthday Party</p>
-        <svg class="c2-div top" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><path d="M93 23c-4.3 0-7.5-4.1-7.5-9 0-3.2 3.4-4.8 7.5-4.8s7.5 1.6 7.5 4.8c0 4.9-3.2 9-7.5 9z" fill="#C9A227"/><path d="M85 9c0-3.3 3.6-5.8 8-5.8s8 2.5 8 5.8c0 1.8-3.6 2.7-8 2.7S85 10.8 85 9z" fill="#7A5334"/><rect x="91.9" y="0" width="2.2" height="4.6" rx="1.1" fill="#7A5334"/></g></svg>
+        <div class="c2-divwrap top"><svg class="c2-div" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><path d="M93 23c-4.3 0-7.5-4.1-7.5-9 0-3.2 3.4-4.8 7.5-4.8s7.5 1.6 7.5 4.8c0 4.9-3.2 9-7.5 9z" fill="#C9A227"/><path d="M85 9c0-3.3 3.6-5.8 8-5.8s8 2.5 8 5.8c0 1.8-3.6 2.7-8 2.7S85 10.8 85 9z" fill="#7A5334"/><rect x="91.9" y="0" width="2.2" height="4.6" rx="1.1" fill="#7A5334"/></g></svg><svg class="c2-sprite" viewBox="0 0 28 27" aria-hidden="true" style="--wd:12s;--wdl:0s"><g class="bob"><path class="legL" d="M11 21.4 10.3 25.3" stroke="#6B4F3A" stroke-width="3.1" stroke-linecap="round"/><path class="legR" d="M17 21.4 17.7 25.3" stroke="#6B4F3A" stroke-width="3.1" stroke-linecap="round"/><path d="M14 12.4c5.6 0 9.1 4.1 9.1 8 0 2.6-3.9 3.7-9.1 3.7S4.9 23 4.9 20.4c0-3.9 3.5-8 9.1-8z" fill="#8FA87C"/><path class="armB" d="M6.8 16.8 3.3 19.4" stroke="#6B8459" stroke-width="3" stroke-linecap="round"/><path class="armF" d="M21.2 16.8 24.7 19.4" stroke="#6B8459" stroke-width="3" stroke-linecap="round"/><g class="head"><circle cx="14" cy="11" r="5.1" fill="#F6DCC0"/><path d="M9 10.8c0 5.4 2.2 9.2 5 9.2s5-3.8 5-9.2c-1.6 1.5-8.4 1.5-10 0z" fill="#FBF5E6"/><path d="M9.6 13.4c1.2.9 7.6.9 8.8 0" stroke="#E6D8BE" stroke-width=".7" fill="none"/><circle cx="11.5" cy="9.9" r=".95" fill="#5A4632"/><circle cx="16.5" cy="9.9" r=".95" fill="#5A4632"/><circle cx="9.5" cy="11.8" r="1.25" fill="#E8A08C" opacity=".8"/><circle cx="18.5" cy="11.8" r="1.25" fill="#E8A08C" opacity=".8"/><circle cx="14" cy="12.1" r="2.1" fill="#EFBFA4"/><path d="M15.1 1.4C16.6 4.6 18.9 7.4 21.9 9.5L6.1 9.5C9.2 7.3 11.8 4.5 13.2 1.6a1.05 1.05 0 0 1 1.9-.2z" fill="#7E9A6E"/><ellipse cx="14" cy="9.6" rx="8.6" ry="1.7" fill="#6B8459"/></g></g></svg></div>
         <div class="guest-block">
           <p class="dear">親愛的</p>
           <p class="script"><span class="guest">Amber Lin</span></p>
           <p class="dear">邀請您一起來喝杯咖啡、慶祝畇安一歲</p>
         </div>
-        <svg class="c2-div bot" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><path d="M83.5 12.4c0-5.2 4.3-8.9 9.5-8.9s9.5 3.7 9.5 8.9c0 1.9-2 2.7-9.5 2.7s-9.5-.8-9.5-2.7z" fill="#C1663D"/><circle cx="88.4" cy="8.8" r="1.7" fill="#FBF3E4"/><circle cx="95.8" cy="7.4" r="1.4" fill="#FBF3E4"/><circle cx="98.4" cy="11.4" r="1.2" fill="#FBF3E4"/><path d="M89.6 15.1h6.8l-.9 7.1a2.5 2.5 0 0 1-5 0z" fill="#CDAF83"/></g></svg>
+        <div class="c2-divwrap bot"><svg class="c2-div" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><path d="M83.5 12.4c0-5.2 4.3-8.9 9.5-8.9s9.5 3.7 9.5 8.9c0 1.9-2 2.7-9.5 2.7s-9.5-.8-9.5-2.7z" fill="#C1663D"/><circle cx="88.4" cy="8.8" r="1.7" fill="#FBF3E4"/><circle cx="95.8" cy="7.4" r="1.4" fill="#FBF3E4"/><circle cx="98.4" cy="11.4" r="1.2" fill="#FBF3E4"/><path d="M89.6 15.1h6.8l-.9 7.1a2.5 2.5 0 0 1-5 0z" fill="#CDAF83"/></g></svg><svg class="c2-sprite" viewBox="0 0 28 27" aria-hidden="true" style="--wd:15s;--wdl:-5s"><g class="bob"><path class="legL" d="M11 21.4 10.3 25.3" stroke="#7A5334" stroke-width="3.1" stroke-linecap="round"/><path class="legR" d="M17 21.4 17.7 25.3" stroke="#7A5334" stroke-width="3.1" stroke-linecap="round"/><path d="M14 12.4c5.6 0 9.1 4.1 9.1 8 0 2.6-3.9 3.7-9.1 3.7S4.9 23 4.9 20.4c0-3.9 3.5-8 9.1-8z" fill="#C4A183"/><path class="armB" d="M6.8 16.8 3.3 19.4" stroke="#A0805F" stroke-width="3" stroke-linecap="round"/><path class="armF" d="M21.2 16.8 24.7 19.4" stroke="#A0805F" stroke-width="3" stroke-linecap="round"/><g class="head"><circle cx="14" cy="11" r="5.1" fill="#F6DCC0"/><path d="M9 10.8c0 5.4 2.2 9.2 5 9.2s5-3.8 5-9.2c-1.6 1.5-8.4 1.5-10 0z" fill="#FBF5E6"/><path d="M9.6 13.4c1.2.9 7.6.9 8.8 0" stroke="#E6D8BE" stroke-width=".7" fill="none"/><circle cx="11.5" cy="9.9" r=".95" fill="#5A4632"/><circle cx="16.5" cy="9.9" r=".95" fill="#5A4632"/><circle cx="9.5" cy="11.8" r="1.25" fill="#E8A08C" opacity=".8"/><circle cx="18.5" cy="11.8" r="1.25" fill="#E8A08C" opacity=".8"/><circle cx="14" cy="12.1" r="2.1" fill="#EFBFA4"/><path d="M5.4 9.2C5.4 5.2 9.2 2 14 2s8.6 3.2 8.6 7.2c0 1.6-3.9 2.1-8.6 2.1S5.4 10.8 5.4 9.2z" fill="#C1663D"/><circle cx="9.7" cy="6.7" r="1.15" fill="#FBF3E4"/><circle cx="14.2" cy="5.2" r="1" fill="#FBF3E4"/><circle cx="18" cy="7.3" r=".9" fill="#FBF3E4"/></g></g></svg></div>
         <dl class="info">
           <div><dt>時間</dt><dd>9/28（一）14:00</dd></div>
           <div><dt>地點</dt><dd><span class="vn">樹瓅咖啡 st. tree cafe<span class="cup" aria-hidden="true"><i></i><i></i><i></i></span></span></dd></div>
           <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
         </dl>
         <div class="cupline">
-          <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+          <a class="map" href="https://maps.app.goo.gl/L2KKskiBC6GGvu8n7" target="_blank" rel="noopener">查看地圖</a>
         </div>
       </div>
     </div>
@@ -491,7 +502,7 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
           <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
           <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
         </dl>
-        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+        <a class="map" href="https://maps.app.goo.gl/L2KKskiBC6GGvu8n7" target="_blank" rel="noopener">查看地圖</a>
       </div>
     </div>
   </div>
@@ -526,7 +537,7 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
           <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
           <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
         </dl>
-        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+        <a class="map" href="https://maps.app.goo.gl/L2KKskiBC6GGvu8n7" target="_blank" rel="noopener">查看地圖</a>
       </div>
     </div>
   </div>
@@ -561,7 +572,7 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
           <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
           <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
         </dl>
-        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+        <a class="map" href="https://maps.app.goo.gl/L2KKskiBC6GGvu8n7" target="_blank" rel="noopener">查看地圖</a>
       </div>
     </div>
   </div>
@@ -595,7 +606,7 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
           <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
           <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
         </dl>
-        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+        <a class="map" href="https://maps.app.goo.gl/L2KKskiBC6GGvu8n7" target="_blank" rel="noopener">查看地圖</a>
       </div>
     </div>
   </div>
