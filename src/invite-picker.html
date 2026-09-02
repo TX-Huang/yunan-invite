@@ -830,16 +830,24 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
       .to(s('.armF'), { rotate: -32 }, 0).to(s('.armB'), { rotate: 32 }, 0);
   }
 
-  /* 留在裝飾線上的來回散步 */
+  /* 留在裝飾線上：來回走，中間跳好幾次 */
   function patrol(el, i, startX) {
-    var far = 176, back = -18, speed = 32 + i * 6;
-    return gsap.timeline({ repeat: -1 })
-      .to(el, { x: far, duration: Math.abs(far - startX) / speed, ease: 'none' })
-      .to(el, { y: -5, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.out' }, '<50%')
-      .to(el, { scaleX: -1, duration: 0.3, ease: 'back.out(2.2)' })
-      .to(el, { x: back, duration: (far - back) / speed, ease: 'none' })
-      .to(el, { y: -5, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.out' }, '<45%')
-      .to(el, { scaleX: 1, duration: 0.3, ease: 'back.out(2.2)' });
+    var far = 176, back = -18, speed = 26 + i * 4;
+    function leg(tl, to, from) {
+      var d = Math.abs(to - from) / speed;
+      tl.to(el, { x: to, duration: d, ease: 'none' });
+      [0.25, 0.5, 0.75].forEach(function (f) {
+        tl.to(el, { y: -6, duration: 0.19, yoyo: true, repeat: 1, ease: 'power2.out' },
+              '<' + (d * f).toFixed(2));
+      });
+      return tl;
+    }
+    var tl = gsap.timeline({ repeat: -1 });
+    leg(tl, far, startX);
+    tl.to(el, { scaleX: -1, duration: 0.32, ease: 'back.out(2.2)' });
+    leg(tl, back, far);
+    tl.to(el, { scaleX: 1, duration: 0.32, ease: 'back.out(2.2)' });
+    return tl;
   }
 
   var sprites = q('.c2-sprite');
@@ -883,11 +891,11 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
     var tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
     var jobs = [
       { els: q('.popout'), dir: -1, at: 0.00 },
-      { els: q('.eyebrow').concat(q('h2'), q('.c2-sub')), dir: 1, at: 0.55 },
-      { els: q('.c2-divwrap.top'), dir: -1, at: 1.10, stay: 0 },
-      { els: q('.guest-block'), dir: 1, at: 1.55 },
-      { els: q('.c2-divwrap.bot'), dir: -1, at: 2.10, stay: 1 },
-      { els: q('.info').concat(q('.cupline')), dir: 1, at: 2.55 }
+      { els: q('.eyebrow').concat(q('h2'), q('.c2-sub')), dir: 1, at: 0.85 },
+      { els: q('.c2-divwrap.top'), dir: -1, at: 1.70 },
+      { els: q('.guest-block'), dir: 1, at: 2.55 },
+      { els: q('.c2-divwrap.bot'), dir: -1, at: 3.40 },
+      { els: q('.info').concat(q('.cupline')), dir: 1, at: 4.25 }
     ];
 
     gsap.set(sprites, { autoAlpha: 0 });
@@ -898,13 +906,13 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
       var p = box(job.els);
       var travel = job.dir * 230;
       var restX = p.x + p.w / 2 - GW / 2;
-      var g = porter(sprites[job.stay === undefined ? n % 2 : job.stay]);
+      var g = porter(sprites[n % 2]);
       /* 小矮人站在部件正下方，舉起的手剛好頂到部件底邊 */
       var standY = p.y + p.h - HANDS;
       gsap.set(g, { x: restX + travel, y: standY, scaleX: job.dir < 0 ? 1 : -1, autoAlpha: 1 });
       var h = walkLoop(g, true);
 
-      var t = job.at, carry = 1.0;
+      var t = job.at, carry = 1.4;
       tl.fromTo(job.els, { x: travel, autoAlpha: 0 },
                 { x: 0, autoAlpha: 1, duration: carry, ease: 'power2.out' }, t)
         .to(g, { x: restX, duration: carry, ease: 'power2.out' }, t)
@@ -917,29 +925,28 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
         .fromTo(job.els, { y: -3 }, { y: 0, duration: 0.35, ease: 'bounce.out' }, t + carry + 0.1)
         .add(function () { release(g, h); }, t + carry + 0.16);
 
-      if (job.stay === undefined) {
-        tl.to(g, { scaleX: job.dir < 0 ? -1 : 1, duration: 0.22, ease: 'back.out(2)' }, t + carry + 0.5)
-          .to(g, { x: restX - travel * 0.95, duration: 0.85, ease: 'power1.in' }, t + carry + 0.7)
-          .set(g, { autoAlpha: 0 }, t + carry + 1.55);
-      } else {
-        var real = sprites[job.stay];
-        var wrapBox = box([job.els[0]]);
-        tl.to(g, { y: wrapBox.y + 2, duration: 0.42, ease: 'back.out(1.7)' }, t + carry + 0.5)
-          .add(function () {
-            var localX = restX - wrapBox.x;
-            gsap.set(real, { x: localX, y: 0, scaleX: 1, autoAlpha: 1 });
-            walkLoop(real);
-            patrol(real, job.stay, localX);
-            gsap.set(g, { autoAlpha: 0 });
-          }, t + carry + 0.95);
-      }
+      tl.to(g, { scaleX: job.dir < 0 ? -1 : 1, duration: 0.26, ease: 'back.out(2)' }, t + carry + 0.6)
+        .to(g, { x: restX - travel * 0.95, duration: 1.1, ease: 'power1.in' }, t + carry + 0.85)
+        .set(g, { autoAlpha: 0 }, t + carry + 2.0);
+    });
+
+    /* 常駐的兩隻：不搬東西，等線放好了自己走進來，之後就在線上來回跳 */
+    [{ i: 0, wrap: q('.c2-divwrap.top')[0], at: 3.35 },
+     { i: 1, wrap: q('.c2-divwrap.bot')[0], at: 5.05 }].forEach(function (r) {
+      if (!r.wrap) return;
+      var real = sprites[r.i];
+      gsap.set(real, { x: -46, y: 0, scaleX: 1, autoAlpha: 0 });
+      walkLoop(real);
+      tl.set(real, { autoAlpha: 1 }, r.at)
+        .to(real, { x: 16, duration: 1.5, ease: 'none' }, r.at)
+        .add(function () { patrol(real, r.i, 16); }, r.at + 1.5);
     });
 
     tl.to(q('.c2-frame'), { autoAlpha: 1, duration: 0.7 }, 0.15)
       .fromTo(q('.c2-deco'), { autoAlpha: 0, scale: 0.35 },
               { autoAlpha: 1, scale: 1, duration: 0.6, ease: 'back.out(2.2)',
-                stagger: { each: 0.06, from: 'random' } }, 1.0)
-      .to(q('.leaf'), { autoAlpha: 1, duration: 0.7, stagger: 0.05 }, 2.8);
+                stagger: { each: 0.09, from: 'random' } }, 1.2)
+      .to(q('.leaf'), { autoAlpha: 1, duration: 0.8, stagger: 0.07 }, 4.4);
 
     return function () { tl.kill(); layer.remove(); };
   });
