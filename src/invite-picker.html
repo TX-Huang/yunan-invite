@@ -131,6 +131,19 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',s
 .c2-div.bot{margin:8px 0 0}
 .c2-div .sprig{transform-box:fill-box;transform-origin:50% 50%;animation:c2divsway 5s ease-in-out infinite alternate}
 @keyframes c2divsway{from{rotate:-4deg}to{rotate:4deg}}
+/* 版面 B：照片放在標題與稱謂中間 */
+.c2b .body{padding:26px 40px 24px}
+.c2b .c2-tree{width:44px;height:40px}
+.c2b .eyebrow{margin-top:8px}
+.c2b h2{font-size:29px;margin-top:0}
+.c2b .c2-sub{font-size:17px}
+.c2b .popout{margin:14px 0 58px}
+.c2b .guest-block{margin:2px 0 auto}
+.c2b .info{gap:6px}
+.c2b .cupline{margin-top:8px}
+.send .lab{font-size:12px;letter-spacing:.1em;color:var(--muted);align-self:center}
+.send .opt{flex-direction:row;align-items:center;gap:6px;font-size:13.5px;letter-spacing:0;color:var(--ink);cursor:pointer}
+.send .opt input{accent-color:var(--accent);width:16px;height:16px}
 .c2-tree{width:48px;height:44px;display:block}
 .c2-tree .canopy{transform-box:fill-box;transform-origin:50% 100%;animation:c2sway 5s ease-in-out infinite alternate}
 @keyframes c2sway{from{rotate:-2.5deg}to{rotate:2.5deg}}
@@ -317,6 +330,11 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
   <h2>做給每位朋友的專屬連結</h2>
   <p class="lead">把名字一行一個貼進來，按「產生連結」。每位朋友點開自己的連結，就會看到寫著他名字的邀請卡。</p>
   <div class="row">
+    <span class="lab">版面</span>
+    <label class="opt"><input type="radio" name="layout" value="a" checked> A · 照片在最上面</label>
+    <label class="opt"><input type="radio" name="layout" value="b"> B · 照片在標題下面</label>
+  </div>
+  <div class="row">
     <input type="hidden" id="sendStyle" value="2">
     <button id="makeLinks" type="button">產生連結</button>
     <button id="copyAll" type="button" class="ghost">全部複製</button>
@@ -423,13 +441,13 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
         <p class="eyebrow">Invitation</p>
         <h2>畇安 週歲</h2>
         <p class="c2-sub">First Birthday Party</p>
-        <svg class="c2-div top" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><path d="M93 23c-4.3 0-7.5-4.1-7.5-9 0-3.2 3.4-4.8 7.5-4.8s7.5 1.6 7.5 4.8c0 4.9-3.2 9-7.5 9z" fill="#C9A227"/><path d="M85 9c0-3.3 3.6-5.8 8-5.8s8 2.5 8 5.8c0 1.8-3.6 2.7-8 2.7S85 10.8 85 9z" fill="#7A5334"/><rect x="91.9" y="0" width="2.2" height="4.6" rx="1.1" fill="#7A5334"/></g></svg>
+        <svg class="c2-div top" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><defs><clipPath id="sbclip"><circle cx="93" cy="12" r="9.6"/></clipPath></defs><circle cx="93" cy="12" r="9.6" fill="#E3BE81" stroke="#C89A57" stroke-width="1.1"/><g clip-path="url(#sbclip)"><rect x="82" y="8.3" width="22" height="7.4" fill="#3F4B3C"/></g><circle cx="88.3" cy="6.4" r="1" fill="#C89A57"/><circle cx="97.8" cy="18" r=".9" fill="#C89A57"/></g></svg>
         <div class="guest-block">
           <p class="dear">親愛的</p>
           <p class="script"><span class="guest">Amber Lin</span></p>
           <p class="dear">邀請您一起來喝杯咖啡、慶祝畇安一歲</p>
         </div>
-        <svg class="c2-div bot" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><path d="M83.5 12.4c0-5.2 4.3-8.9 9.5-8.9s9.5 3.7 9.5 8.9c0 1.9-2 2.7-9.5 2.7s-9.5-.8-9.5-2.7z" fill="#C1663D"/><circle cx="88.4" cy="8.8" r="1.7" fill="#FBF3E4"/><circle cx="95.8" cy="7.4" r="1.4" fill="#FBF3E4"/><circle cx="98.4" cy="11.4" r="1.2" fill="#FBF3E4"/><path d="M89.6 15.1h6.8l-.9 7.1a2.5 2.5 0 0 1-5 0z" fill="#F2E6CE"/></g></svg>
+        <svg class="c2-div bot" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><rect x="80.5" y="9.6" width="10.4" height="10.4" rx="3.2" fill="#EFD9AC" stroke="#CBAE73" stroke-width="1"/><rect x="90.6" y="5.4" width="11.6" height="11.6" rx="3.6" fill="#E0B978" stroke="#C89A57" stroke-width="1"/><rect x="94.2" y="5.9" width="4.4" height="10.6" fill="#3F4B3C"/><circle cx="84.6" cy="13.4" r=".9" fill="#CBAE73"/></g></svg>
         <dl class="info">
           <div><dt>時間</dt><dd>9/28（一）14:00</dd></div>
           <div><dt>地點</dt><dd><span class="vn">樹瓅咖啡 st. tree cafe<span class="cup" aria-hidden="true"><i></i><i></i><i></i></span></span></dd></div>
@@ -631,11 +649,23 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
   var styleNo = Math.min(6, Math.max(1, parseInt(qs.get('s') || '2', 10) || 2));
   var sections = document.querySelectorAll('main > section');
 
+  // 版面 B 把照片移到「First Birthday Party」之後；A 移回開頭的位置
+  function applyLayout(card, mode){
+    if(!card) return;
+    var pop = card.querySelector('.popout'), sub = card.querySelector('.c2-sub'),
+        eye = card.querySelector('.eyebrow');
+    if(!pop || !sub || !eye) return;
+    if(mode === 'b'){ card.classList.add('c2b'); sub.after(pop); }
+    else { card.classList.remove('c2b'); eye.after(pop); }
+  }
+
   if (guestName) {
     document.body.classList.add('solo');
     sections[styleNo - 1].classList.add('on');
     input.value = guestName;
     setGuest(guestName);
+    applyLayout(sections[styleNo - 1].querySelector('.card'),
+                (qs.get('layout') || 'a').toLowerCase());
     document.title = guestName + '｜侯畇安 週歲派對邀請卡';
   } else {
     var panel = document.querySelector('.send');
@@ -645,12 +675,24 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
     var rows = [];
 
     function baseUrl(){ return location.origin + location.pathname; }
+    function layout(){
+      var r = document.querySelector('input[name=layout]:checked');
+      return r ? r.value : 'a';
+    }
+    var previewCard = sections[1].querySelector('.card');
+    document.querySelectorAll('input[name=layout]').forEach(function(r){
+      r.addEventListener('change', function(){
+        applyLayout(previewCard, layout());
+        if (rows.length) build();
+      });
+    });
     function build(){
       var names = document.getElementById('names').value.split('\n')
         .map(function(x){ return x.trim(); }).filter(Boolean);
       out.innerHTML = ''; rows = [];
       names.forEach(function(nm){
-        var url = baseUrl() + '?s=' + sel.value + '&to=' + encodeURIComponent(nm);
+        var url = baseUrl() + '?to=' + encodeURIComponent(nm)
+                  + (layout() === 'b' ? '&layout=b' : '');
         rows.push(nm + '\t' + url);
         var li = document.createElement('li');
         var who = document.createElement('span'); who.className = 'who'; who.textContent = nm;
