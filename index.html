@@ -4,7 +4,7 @@
 <title>畇安週歲邀請卡</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Playfair+Display:ital,wght@0,600;1,500&family=Bricolage+Grotesque:wght@800&family=DM+Serif+Display:ital@0;1&family=Great+Vibes&family=Allura&family=Pacifico&family=Long+Cang&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Playfair+Display:ital,wght@0,600;1,500&family=Bricolage+Grotesque:wght@800&family=DM+Serif+Display:ital@0;1&family=Dancing+Script:wght@600&family=Great+Vibes&family=Allura&family=Pacifico&family=Long+Cang&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
 <style>
 /* ---------- page shell (theme-aware) ---------- */
 :root{--bg:#F6F3EC;--surface:#FFFFFF;--ink:#24211B;--muted:#77705F;--line:#E3DDD0;--accent:#3F6B5C;--accent-ink:#FFFFFF;--shadow:0 18px 40px rgba(60,50,30,.16)}
@@ -48,7 +48,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',s
 .card h2{text-wrap:balance}
 .guest-block{display:flex;flex-direction:column;align-items:center;gap:2px}
 .dear{font-size:13px;letter-spacing:.12em}
-.script{font-family:'Great Vibes','Long Cang','LXGW WenKai TC',cursive;font-size:44px;line-height:1.15;font-weight:400;padding:2px 10px 0}
+.script{font-family:'Dancing Script','LXGW WenKai TC',cursive;font-size:40px;line-height:1.2;font-weight:600;padding:2px 10px 0}
+/* chinese names get 楷體 — handwritten but fully legible, not 草書 */
+.script.cjk{font-family:'LXGW WenKai TC','Noto Serif TC',serif;font-size:31px;font-weight:700;letter-spacing:.12em;line-height:1.35;padding-top:4px}
 .info{margin:0;display:grid;gap:9px;width:100%}
 .info>div{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:baseline;text-align:left}
 .info dt{font-size:10.5px;letter-spacing:.22em;color:var(--label)}
@@ -549,7 +551,10 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
 
   var FALLBACK='貴賓';
   var input=document.getElementById('guest');
-  function setGuest(v){var t=(v||'').trim()||FALLBACK;document.querySelectorAll('.guest').forEach(function(e){e.textContent=t;});}
+  var CJK=/[㐀-鿿豈-﫿぀-ヿ]/;
+  function setGuest(v){var t=(v||'').trim()||FALLBACK;
+    document.querySelectorAll('.guest').forEach(function(e){e.textContent=t;});
+    document.querySelectorAll('.script').forEach(function(e){e.classList.toggle('cjk',CJK.test(t));});}
   input.addEventListener('input',function(e){setGuest(e.target.value);});
   document.querySelectorAll('.chips button').forEach(function(b){b.addEventListener('click',function(){input.value=b.dataset.n;setGuest(b.dataset.n);});});
 
