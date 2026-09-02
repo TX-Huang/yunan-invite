@@ -776,7 +776,44 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
 (function(){
   if (!window.gsap) return;
   var sprites = document.querySelectorAll('.c2-sprite');
-  if (!sprites.length) return;
+
+
+  /* 受邀人打開自己的連結時，卡片一段一段展開 */
+  gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function(){
+    if (!document.body.classList.contains('solo')) return;
+    var sec = document.querySelector('main > section.on');
+    if (!sec) return;
+    var slot = sec.querySelector('.slot'), card = sec.querySelector('.card');
+    var q = gsap.utils.selector(card);
+    /* CSS 的進場動畫交給 GSAP，避免兩邊打架 */
+    card.querySelectorAll('.stagger > *').forEach(function(el){ el.style.animation = 'none'; });
+
+    var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.from(slot, { autoAlpha: 0, y: 26, scale: 0.965, duration: 0.75 })
+      .from(q('.c2-frame'), { autoAlpha: 0, scale: 0.93, duration: 0.6 }, '-=0.4')
+      .from(q('.popout'), { autoAlpha: 0, y: 20, scale: 0.88, duration: 0.8,
+                            ease: 'back.out(1.6)' }, '-=0.3')
+      .from(q('.eyebrow'), { autoAlpha: 0, y: 10, duration: 0.5 }, '-=0.4')
+      .from(q('h2'), { autoAlpha: 0, y: 14, duration: 0.55 }, '-=0.32')
+      .from(q('.c2-sub'), { autoAlpha: 0, y: 12, duration: 0.5 }, '-=0.38')
+      /* 兩條裝飾線從中間往兩側展開 */
+      .from(q('.c2-divwrap'), { autoAlpha: 0, scaleX: 0.15, transformOrigin: '50% 50%',
+                                duration: 0.65, stagger: 0.14 }, '-=0.25')
+      .from(q('.dear'), { autoAlpha: 0, y: 8, duration: 0.42, stagger: 0.12 }, '-=0.45')
+      /* 名字最後才出現，稍微彈一下 */
+      .from(q('.script'), { autoAlpha: 0, y: 18, scale: 0.84, duration: 0.8,
+                            ease: 'back.out(1.9)' }, '-=0.5')
+      .from(q('.info > div'), { autoAlpha: 0, y: 10, duration: 0.45, stagger: 0.1 }, '-=0.35')
+      .from(q('.cupline'), { autoAlpha: 0, y: 10, duration: 0.45 }, '-=0.22')
+      /* 秋天小圖案隨機一顆一顆冒出來 */
+      .from(q('.c2-deco'), { autoAlpha: 0, scale: 0.35, duration: 0.6,
+                             ease: 'back.out(2.2)',
+                             stagger: { each: 0.055, from: 'random' } }, 0.45)
+      .from(q('.leaf'), { autoAlpha: 0, duration: 0.7, stagger: 0.05 }, 0.7)
+      .from(q('.c2-sprite'), { autoAlpha: 0, duration: 0.5 }, 1.1)
+      .timeScale(1.2);   /* 整體節奏快一點，約 3 秒收尾 */
+    return function(){ tl.kill(); };
+  });
 
   gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function(){
     sprites.forEach(function(el, i){
