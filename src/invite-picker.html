@@ -1,0 +1,719 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>畇安週歲邀請卡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Playfair+Display:ital,wght@0,600;1,500&family=Bricolage+Grotesque:wght@800&family=DM+Serif+Display:ital@0;1&family=Dancing+Script:wght@600&family=Great+Vibes&family=Allura&family=Pacifico&family=Long+Cang&family=Zen+Maru+Gothic:wght@500;700&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<style>
+/* ---------- page shell (theme-aware) ---------- */
+:root{--bg:#F6F3EC;--surface:#FFFFFF;--ink:#24211B;--muted:#77705F;--line:#E3DDD0;--accent:#3F6B5C;--accent-ink:#FFFFFF;--shadow:0 18px 40px rgba(60,50,30,.16)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1A1815;--surface:#252220;--ink:#EEE8DA;--muted:#A69D8A;--line:#3B3730;--accent:#8CC4AB;--accent-ink:#142019;--shadow:0 18px 40px rgba(0,0,0,.5)}}
+:root[data-theme="dark"]{--bg:#1A1815;--surface:#252220;--ink:#EEE8DA;--muted:#A69D8A;--line:#3B3730;--accent:#8CC4AB;--accent-ink:#142019;--shadow:0 18px 40px rgba(0,0,0,.5)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.bar{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);padding:14px clamp(16px,4vw,48px);display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+.brand{display:flex;flex-direction:column;gap:2px;margin-right:auto}
+.brand strong{font-size:17px;font-weight:700;letter-spacing:.02em}
+.brand span{font-size:12px;color:var(--muted);letter-spacing:.06em}
+.field{display:flex;flex-direction:column;gap:4px;min-width:240px}
+.field span{font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+.field input{font:inherit;font-size:15px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+.field input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips button{font:inherit;font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chips button:hover{border-color:var(--accent);color:var(--accent)}
+.chips button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:34px 28px;padding:28px clamp(16px,4vw,48px) 72px;max-width:1440px;margin:0 auto}
+.pick{display:flex;align-items:baseline;gap:10px;margin:0 0 10px}
+.pick .num{font-family:'DM Serif Display',serif;font-size:24px;line-height:1;color:var(--accent)}
+.pick .style-name{font-weight:700;font-size:15px}
+.pick .tag{color:var(--muted);font-size:12px;letter-spacing:.08em;margin-left:auto}
+.slot{position:relative;width:100%;aspect-ratio:9/16;overflow:hidden;border-radius:24px;box-shadow:var(--shadow);cursor:zoom-in;background:#ddd}
+.slot:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.scaler .card{position:absolute;top:0;left:0;transform:scale(var(--s,1));transform-origin:top left}
+.hint{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 40px;letter-spacing:.04em}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(15,12,8,.76);display:grid;place-items:center;z-index:50;padding:24px}
+.modal[hidden]{display:none}
+.modal-box{display:flex;flex-direction:column;align-items:center;gap:14px}
+.stage{position:relative;overflow:hidden;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.close{font:inherit;font-size:14px;padding:9px 20px;border-radius:999px;border:0;background:var(--surface);color:var(--ink);cursor:pointer}
+.close:focus-visible{outline:2px solid var(--accent)}
+
+/* ---------- card base (each card is its own fixed world) ---------- */
+.card{width:360px;height:640px;position:relative;overflow:hidden;--label:#888;--text:#222;--link:#555}
+.card .body{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;text-align:center}
+.card h2,.card h3,.card p{margin:0}
+.card h2{text-wrap:balance}
+.guest-block{display:flex;flex-direction:column;align-items:center;gap:2px}
+.dear{font-size:13px;letter-spacing:.12em}
+.script{font-family:'Dancing Script','LXGW WenKai TC',cursive;font-size:40px;line-height:1.2;font-weight:600;padding:2px 10px 0}
+/* chinese names get 楷體 — handwritten but fully legible, not 草書 */
+.script.cjk{font-family:'Zen Maru Gothic','LXGW WenKai TC',sans-serif;font-size:33px;font-weight:700;letter-spacing:.16em;line-height:1.35;padding-top:5px}
+.info{margin:0;display:grid;gap:9px;width:100%}
+.info>div{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:baseline;text-align:left}
+.info dt{font-size:10.5px;letter-spacing:.22em;color:var(--label)}
+.info dd{margin:0;font-size:14px;color:var(--text);font-variant-numeric:tabular-nums}
+.map{display:inline-block;font-size:11.5px;letter-spacing:.18em;padding:8px 18px;border-radius:999px;border:1px solid currentColor;color:var(--link);text-decoration:none}
+.map:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+/* pop-out photo: clipped photo + unclipped arm layer + grabbed object */
+.popout{position:relative;flex:none}
+.popout .photo{position:absolute;inset:0;overflow:hidden;border-radius:inherit;background:#E9DCC8;z-index:1}
+.popout .photo img{position:absolute;height:auto;max-width:none;display:block}
+.popout::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2}
+.popout .arm{position:absolute;height:auto;max-width:none;z-index:3;pointer-events:none;display:block}
+.popout .grab{position:absolute;z-index:4;pointer-events:none;animation:bob 2.4s ease-in-out infinite alternate}
+.popout .grab svg{display:block;width:100%;height:100%;overflow:visible}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flicker .9s ease-in-out infinite alternate}
+@keyframes flicker{from{scale:1 1}to{scale:.8 1.2}}
+@keyframes bob{to{translate:0 -4px}}
+@keyframes wobble{from{rotate:-8deg}to{rotate:8deg}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}}
+.stagger>*{animation:fadeUp .9s cubic-bezier(.2,.7,.2,1) both}
+.stagger>:nth-child(1){animation-delay:.1s}.stagger>:nth-child(2){animation-delay:.22s}.stagger>:nth-child(3){animation-delay:.34s}.stagger>:nth-child(4){animation-delay:.46s}.stagger>:nth-child(5){animation-delay:.58s}.stagger>:nth-child(6){animation-delay:.7s}.stagger>:nth-child(7){animation-delay:.82s}.stagger>:nth-child(8){animation-delay:.94s}.stagger>:nth-child(9){animation-delay:1.06s}.stagger>:nth-child(10){animation-delay:1.18s}
+
+/* ---------- 1 · 奶油氣球 ---------- */
+.c1{background:#FFF6E8;color:#5A3E36;font-family:'Noto Serif TC',serif;--label:#C58A72;--text:#5A3E36;--link:#C58A72}
+.c1 .body{padding:32px 34px 28px}
+.c1 .popout{width:150px;height:150px;border-radius:50%;margin:8px 0 74px}
+.c1 .popout::after{inset:-5px;border:5px solid #FFFFFF;box-shadow:0 0 0 2px #F2B8A0,0 10px 24px rgba(90,62,54,.15)}
+.c1 .photo{background:radial-gradient(circle at 50% 32%,#FFFBF3,#F7E2D0)}
+.c1 .photo img{width:172.0px;left:-16.0px;top:1.0px}
+.c1 .arm{left:-16.0px;top:1.0px;width:172.0px}
+.c1 .grab{left:94.0px;top:183.0px;width:44.0px;height:50.0px}
+.c1-balloons span{position:absolute;bottom:-150px;width:58px;height:72px;border-radius:50%/48% 48% 52% 52%;background:var(--b);box-shadow:inset -8px -10px 0 rgba(0,0,0,.05),inset 6px 8px 0 rgba(255,255,255,.38);animation:c1rise var(--d) linear infinite;animation-delay:var(--dl)}
+.c1-balloons span::before{content:"";position:absolute;left:50%;bottom:-6px;width:10px;height:8px;background:var(--b);transform:translateX(-50%);clip-path:polygon(50% 0,0 100%,100% 100%)}
+.c1-balloons span::after{content:"";position:absolute;left:50%;bottom:-72px;width:1px;height:66px;background:rgba(90,62,54,.3)}
+.c1-balloons span:nth-child(1){left:18px;--b:#F2B8A0;--d:16s;--dl:0s}
+.c1-balloons span:nth-child(2){left:118px;--b:#F6E7C1;--d:19s;--dl:-6s}
+.c1-balloons span:nth-child(3){left:226px;--b:#B9C7A8;--d:17s;--dl:-11s}
+.c1-balloons span:nth-child(4){left:296px;--b:#F2B8A0;--d:21s;--dl:-3s}
+.c1-balloons span:nth-child(5){left:66px;--b:#E9C9D4;--d:18s;--dl:-14s;transform:scale(.8)}
+.c1-balloons span:nth-child(6){left:180px;--b:#B9C7A8;--d:20s;--dl:-9s;transform:scale(.7)}
+@keyframes c1rise{from{translate:0 0;rotate:-4deg}50%{translate:8px -440px;rotate:4deg}to{translate:0 -900px;rotate:-4deg}}
+.c1 .eyebrow{font-family:'Fraunces',serif;font-style:italic;font-size:15px;letter-spacing:.1em;color:#C58A72}
+.c1-one{font-family:'Fraunces',serif;font-weight:600;font-size:50px;line-height:1;margin-top:8px;letter-spacing:.06em;color:#E0866A}
+.c1-sub{margin-top:4px;font-size:16px;font-weight:500;letter-spacing:.1em}
+.c1 .guest-block{margin:8px 0 auto}
+.c1 .script{color:#5A3E36}
+.c1 .map{margin-top:10px}
+
+/* ---------- 2 · 樹咖啡 ---------- */
+.c2{background:#F1E9DB;color:#2E3A2B;font-family:'LXGW WenKai TC','Noto Serif TC',serif;--label:#6B4F3A;--text:#2E3A2B;--link:#4F6B4A}
+.c2 .body{padding:30px 40px 26px}
+.c2 .popout{width:132px;height:132px;border-radius:66px 66px 14px 14px;margin:8px 0 66px}
+.c2 .popout::after{inset:-2px;border:1.5px solid #4F6B4A;box-shadow:0 0 0 4px #F1E9DB,0 0 0 5px rgba(79,107,74,.5)}
+.c2 .photo{background:radial-gradient(circle at 50% 32%,#FAF6EA,#DCE5D2)}
+.c2 .photo img{width:151.4px;left:-14.1px;top:0.9px}
+.c2 .arm{left:-14.1px;top:0.9px;width:151.4px}
+.c2 .grab{left:84.5px;top:165.4px;width:35.2px;height:35.2px}
+.c2-frame{position:absolute;inset:14px;border:1.5px solid #4F6B4A;border-radius:16px;pointer-events:none;z-index:1}
+.c2-frame::after{content:"";position:absolute;inset:5px;border:1px solid rgba(79,107,74,.45);border-radius:12px}
+.c2-deco{position:absolute;z-index:1;pointer-events:none;transform:rotate(var(--tilt,0deg));
+  animation:c2bob var(--bd,4.4s) ease-in-out infinite alternate;animation-delay:var(--bdl,0s)}
+.c2-deco.acorn{left:32px;top:62px;width:33px;--tilt:-15deg;--bd:5.2s}
+.c2-deco.berry{left:96px;top:22px;width:21px;--tilt:13deg;--bd:3.8s;--bdl:-1.1s}
+.c2-deco.mush{right:34px;top:28px;width:29px;--tilt:9deg;--bd:4.6s;--bdl:-2.3s}
+.c2-deco.pump{right:104px;top:92px;width:23px;--tilt:-7deg;--bd:6.1s;--bdl:-3.7s}
+.c2-deco.acorn2{right:60px;top:126px;width:17px;--tilt:24deg;--bd:4.1s;--bdl:-0.6s;opacity:.85}
+.c2-deco.mush2{left:64px;top:150px;width:15px;--tilt:-19deg;--bd:5.5s;--bdl:-2.9s;opacity:.8}
+.c2-deco.acorn3{left:24px;top:322px;width:22px;--tilt:12deg;--bd:5.8s;--bdl:-1.7s;opacity:.85}
+.c2-deco.mush3{right:22px;top:286px;width:20px;--tilt:-14deg;--bd:4.9s;--bdl:-3.2s;opacity:.85}
+.c2-deco.pump2{left:26px;top:452px;width:21px;--tilt:-9deg;--bd:6.4s;--bdl:-0.9s;opacity:.8}
+.c2-deco.berry2{right:26px;top:414px;width:18px;--tilt:17deg;--bd:4.3s;--bdl:-2.1s;opacity:.8}
+.c2-deco.acorn4{right:32px;top:566px;width:17px;--tilt:-21deg;--bd:5.1s;--bdl:-4.1s;opacity:.75}
+.c2-deco.mush4{left:34px;top:588px;width:16px;--tilt:11deg;--bd:6.7s;--bdl:-1.3s;opacity:.75}
+
+@keyframes c2bob{from{translate:0 0;rotate:-2.5deg}to{translate:0 -6px;rotate:2.5deg}}
+.c2-div{flex:none;width:186px;display:block;overflow:visible}
+.c2-div.top{margin:14px 0 6px}
+.c2-div.bot{margin:8px 0 0}
+.c2-div .sprig{transform-box:fill-box;transform-origin:50% 50%;animation:c2divsway 5s ease-in-out infinite alternate}
+@keyframes c2divsway{from{rotate:-4deg}to{rotate:4deg}}
+.c2-tree{width:48px;height:44px;display:block}
+.c2-tree .canopy{transform-box:fill-box;transform-origin:50% 100%;animation:c2sway 5s ease-in-out infinite alternate}
+@keyframes c2sway{from{rotate:-2.5deg}to{rotate:2.5deg}}
+.leaf{position:absolute;top:-60px;left:var(--x);width:var(--w);height:calc(var(--w)*1.72);border-radius:0 100% 0 100%;background:var(--lc);opacity:.85;z-index:1;pointer-events:none;animation:leaffall var(--d) linear infinite,leafspin calc(var(--d)/3.2) ease-in-out infinite alternate;animation-delay:var(--dl),var(--dl)}
+@keyframes leaffall{to{translate:var(--sway) 720px}}
+@keyframes leafspin{from{rotate:-40deg}to{rotate:60deg}}
+.c2 .eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:19px;letter-spacing:.04em;color:#6B4F3A;margin-top:6px}
+.c2 h2{font-size:27px;font-weight:700;letter-spacing:.14em;margin-top:0}
+.c2-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:#4F6B4A;margin-top:0}
+.c2 .guest-block{margin:6px 0 auto}
+.c2 .script{color:#4F6B4A}
+.c2 .info{width:auto;min-width:230px;gap:7px}
+.c2 .info dt{font-family:'LXGW WenKai TC',serif;font-size:12px;letter-spacing:.2em}
+.cupline{display:flex;justify-content:center;margin-top:12px;width:100%}
+.c2 .vn{position:relative;display:inline-block}
+.c2 .vn .cup{position:absolute;right:-34px;top:-15px;width:24px;height:18px;border-width:1.8px;border-radius:0 0 9px 9px}
+.c2 .vn .cup::after{right:-9px;top:2px;width:7px;height:8px;border-width:1.8px;border-radius:0 6px 6px 0}
+.c2 .vn .cup i{bottom:23px;height:12px}
+.c2 .vn .cup i:nth-child(1){left:5px}.c2 .vn .cup i:nth-child(2){left:11px}.c2 .vn .cup i:nth-child(3){left:17px}
+.cup{position:relative;width:32px;height:24px;border:2px solid #6B4F3A;border-top:0;border-radius:0 0 12px 12px}
+.cup::after{content:"";position:absolute;right:-11px;top:3px;width:9px;height:11px;border:2px solid #6B4F3A;border-left:0;border-radius:0 8px 8px 0}
+.cup i{position:absolute;bottom:30px;width:2px;height:16px;border-radius:2px;background:#6B4F3A;opacity:0;animation:steam 2.6s ease-in-out infinite}
+.cup i:nth-child(1){left:7px}.cup i:nth-child(2){left:15px;animation-delay:.6s}.cup i:nth-child(3){left:23px;animation-delay:1.2s}
+@keyframes steam{0%{translate:0 6px;opacity:0;scale:1 .6}40%{opacity:.6}100%{translate:2px -12px;opacity:0;scale:1 1}}
+
+/* ---------- 3 · 抓周喜氣 ---------- */
+.c3{background:#FBF1DC;color:#3A1A15;font-family:'Noto Serif TC',serif;--label:#8E1F1C;--text:#3A1A15;--link:#8E1F1C}
+.c3 .body{padding:56px 34px 54px}
+.c3-hero{position:relative;margin:8px 0 74px}
+.c3 .popout{width:150px;height:150px;border-radius:50%}
+.c3 .popout::after{inset:-3px;border:3px solid #E3B85C;box-shadow:0 0 0 6px #FBF1DC,0 0 0 7px #C8322B}
+.c3 .photo{background:radial-gradient(circle at 50% 32%,#FFF8E8,#F2DCBC)}
+.c3 .photo img{width:172.0px;left:-16.0px;top:1.0px}
+.c3 .arm{left:-16.0px;top:1.0px;width:172.0px}
+.c3 .grab{left:95.0px;top:186.0px;width:42.0px;height:44.0px}
+.c3-band{position:absolute;left:0;right:0;height:46px;background:#C8322B;z-index:1}
+.c3-band.top{top:0}.c3-band.bot{bottom:0}
+.c3-band::after{content:"";position:absolute;left:12px;right:12px;top:8px;bottom:8px;border:1px solid #E3B85C}
+.c3-band.top::before,.c3-band.bot::before{content:"";position:absolute;left:0;right:0;height:3px;background:#E3B85C}
+.c3-band.top::before{bottom:-3px}.c3-band.bot::before{top:-3px}
+.lantern{position:absolute;top:34px;width:30px;height:38px;background:#C8322B;border:2px solid #E3B85C;border-radius:40%;transform-origin:50% -24px;animation:swing 3.8s ease-in-out infinite alternate;z-index:2}
+.lantern::before{content:"";position:absolute;left:50%;top:-24px;width:1px;height:22px;background:#E3B85C}
+.lantern::after{content:"";position:absolute;left:50%;bottom:-18px;width:4px;height:16px;margin-left:-2px;background:#E3B85C;border-radius:2px}
+.lantern.a{left:38px}.lantern.b{right:38px;animation-delay:-2s}
+@keyframes swing{from{rotate:-7deg}to{rotate:7deg}}
+.cloud{position:absolute;width:86px;height:44px;animation:drift 11s ease-in-out infinite alternate;z-index:1}
+.cloud.a{left:8px;top:230px}.cloud.b{right:8px;bottom:110px;scale:-1 1;animation-delay:-5s}
+@keyframes drift{from{translate:0 0}to{translate:10px -6px}}
+.c3 .eyebrow{font-size:12px;letter-spacing:.34em;color:#8E1F1C}
+.seal{position:absolute;right:-22px;top:-10px;width:66px;height:66px;background:#C8322B;color:#FBF1DC;border:2px solid #FBF1DC;outline:2px solid #C8322B;display:grid;grid-template-columns:1fr 1fr;direction:rtl;place-items:center;padding:3px;rotate:-6deg;font-size:22px;font-weight:900;line-height:1;animation:stamp .9s cubic-bezier(.2,.9,.3,1.2) .5s both;z-index:2}
+@keyframes stamp{from{scale:1.9;opacity:0}70%{scale:.96;opacity:1}to{scale:1}}
+.c3 h2{font-size:20px;font-weight:900;letter-spacing:.22em;margin-top:12px}
+.c3-rule{width:56px;height:1px;background:#E3B85C;margin:6px 0}
+.c3 .guest-block{margin:0 0 auto}
+.c3 .script{color:#8E1F1C}
+.c3 .info dd{font-weight:500}
+.c3 .map{margin-top:8px}
+
+/* ---------- 4 · 藍白格紋 ---------- */
+.c4{background:#FBF7EC;color:#4A3D30;font-family:'Noto Serif TC',serif;--label:#8FA9C4;--text:#4A3D30;--link:#6E93B8}
+.c4 .body{padding:48px 30px 26px}
+.c4-check{position:absolute;left:0;right:0;bottom:0;height:120px;background:
+  repeating-linear-gradient(90deg,rgba(150,182,210,.34) 0 15px,transparent 15px 30px),
+  repeating-linear-gradient(0deg,rgba(150,182,210,.34) 0 15px,transparent 15px 30px),#F5F9FC;
+  -webkit-mask-image:linear-gradient(#0000,#000 60px);mask-image:linear-gradient(#0000,#000 60px)}
+.c4-bunting{position:absolute;top:-4px;left:-12px;width:384px;transform-origin:50% 0;animation:c4sway 5.5s ease-in-out infinite alternate}
+@keyframes c4sway{from{rotate:-1.1deg}to{rotate:1.1deg}}
+.c4-cloud{position:absolute;animation:c4drift 13s ease-in-out infinite alternate}
+.c4-cloud.a{width:76px;left:12px;top:168px}
+.c4-cloud.b{width:58px;right:16px;top:250px;animation-delay:-7s}
+@keyframes c4drift{from{translate:0 0}to{translate:13px -9px}}
+.c4 .photo img{width:172.0px;left:-16.0px;top:1.0px}
+.c4 .arm{left:-16.0px;top:1.0px;width:172.0px}
+.c4 .grab{left:95.0px;top:187.0px;width:42.0px;height:42.0px}
+.c4 .popout{width:150px;height:150px;border-radius:50%;margin:4px 0 68px}
+.c4 .popout::after{inset:-6px;border:6px solid #FFFFFF;box-shadow:0 0 0 3px #B7CDE2,0 12px 24px rgba(80,100,125,.16)}
+.c4 .photo{background:radial-gradient(circle at 50% 30%,#FFFFFF,#E4EEF7)}
+.c4 .eyebrow{font-family:'Fraunces',serif;font-style:italic;font-size:16px;letter-spacing:.06em;color:#9A7C5E}
+.c4 h2{font-size:34px;font-weight:900;letter-spacing:.16em;margin-top:6px;color:#6E93B8}
+.c4-sub{font-size:17px;font-weight:500;letter-spacing:.22em;color:#9A7C5E;margin-top:2px}
+.c4-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:#A9BFD4;letter-spacing:.08em}
+.c4 .guest-block{margin:10px 0 auto}
+.c4 .script{color:#6E93B8}
+.c4 .info dd{font-weight:500}
+.c4 .info{background:rgba(255,253,247,.86);border-radius:16px;padding:12px 16px;width:auto;min-width:250px;box-shadow:0 4px 14px rgba(110,147,184,.14)}
+.c4 .map{margin-top:10px;border-color:#B7CDE2;background:rgba(255,253,247,.86)}
+
+/* ---------- 5 · 花圈 ---------- */
+.c5{background:#FAF7F0;color:#4A4038;font-family:'Noto Serif TC',serif;--label:#A08C7A;--text:#4A4038;--link:#7E9A6E}
+.c5 .body{padding:40px 34px 30px}
+.c5-hero{position:relative;margin:14px 0 72px}
+.c5 .photo img{width:167.4px;left:-15.6px;top:1.0px}
+.c5 .arm{left:-15.6px;top:1.0px;width:167.4px}
+.c5 .grab{left:95.4px;top:181.0px;width:35.0px;height:42.8px}
+.c5 .popout{width:146px;height:146px;border-radius:50%}
+.c5 .popout::after{inset:-4px;border:1.5px solid #C6B9A4;box-shadow:0 0 0 5px #FAF7F0}
+.c5 .photo{background:radial-gradient(circle at 50% 30%,#FFFDF8,#EFE7DA)}
+.c5 .wreath{position:absolute;inset:-34px;z-index:0;pointer-events:none;animation:c5turn 90s linear infinite}
+.c5 .wreath svg{width:100%;height:100%;display:block}
+@keyframes c5turn{to{rotate:360deg}}
+.c5-petal{position:absolute;top:-14px;width:9px;height:13px;border-radius:0 100% 0 100%;background:#E8B7B0;opacity:.8;animation:c5fall var(--d) linear infinite;animation-delay:var(--dl)}
+@keyframes c5fall{to{translate:26px 700px;rotate:420deg;opacity:.15}}
+.c5 .eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;letter-spacing:.06em;color:#B08968}
+.c5 h2{font-size:31px;font-weight:500;letter-spacing:.2em;margin-top:4px}
+.c5-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:#7E9A6E;margin-top:2px}
+.c5-rule{width:70px;height:1px;background:#C6B9A4;margin:12px 0}
+.c5 .guest-block{margin:0 0 auto}
+.c5 .script{color:#B08968}
+.c5 .map{margin-top:12px;border-color:#C6B9A4}
+
+/* ---------- 6 · 牛皮紙手繪 ---------- */
+.c6{background:#C9B191;color:#FFF9EF;font-family:'LXGW WenKai TC','Noto Serif TC',serif;--label:#EFE0C6;--text:#FFF9EF;--link:#FFF9EF}
+.c6::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(112deg,rgba(255,255,255,.055) 0 2px,transparent 2px 5px),
+             repeating-linear-gradient(22deg,rgba(90,66,40,.05) 0 3px,transparent 3px 7px)}
+.c6-edge{position:absolute;inset:14px;border:1.5px dashed rgba(255,249,239,.5);border-radius:8px;pointer-events:none}
+.c6 .body{padding:46px 34px 26px}
+.c6-doodle{position:absolute;stroke:rgba(255,249,239,.75);fill:none;stroke-width:2;stroke-linecap:round;animation:c6pop 3.4s ease-in-out infinite alternate}
+.c6-doodle.d1{width:34px;left:24px;top:150px}
+.c6-doodle.d2{width:26px;right:26px;top:120px;animation-delay:-1.1s}
+.c6-doodle.d3{width:28px;right:20px;bottom:214px;animation-delay:-2.2s}
+.c6-doodle.d4{width:22px;left:20px;bottom:206px;animation-delay:-.6s}
+@keyframes c6pop{from{scale:.86;opacity:.6}to{scale:1.06;opacity:1}}
+.c6 .photo img{width:160.5px;left:-14.9px;top:0.9px}
+.c6 .arm{left:-14.9px;top:0.9px;width:160.5px}
+.c6 .grab{left:87.7px;top:175.5px;width:41.1px;height:37.3px}
+.c6 .popout{width:140px;height:140px;border-radius:3px;margin:20px 0 66px}
+.c6 .popout::after{inset:-9px -9px -26px;border-radius:3px;background:#FFFDF7;box-shadow:0 10px 22px rgba(70,50,30,.22);z-index:0}
+.c6 .photo{background:radial-gradient(circle at 50% 30%,#FFFDF7,#E9E0D2)}
+.c6-tape{position:absolute;width:56px;height:19px;background:rgba(255,253,247,.72);box-shadow:0 1px 3px rgba(70,50,30,.18);z-index:5}
+.c6-tape.tl{left:-22px;top:-11px;rotate:-32deg}
+.c6-tape.tr{right:-22px;top:-11px;rotate:32deg}
+.c6 .eyebrow{font-size:11px;letter-spacing:.36em;color:#F3E5CD;position:relative;z-index:3}
+.c6 h2{font-size:33px;font-weight:700;letter-spacing:.18em;margin-top:8px}
+.c6-en{font-family:'Fraunces',serif;font-style:italic;font-size:18px;color:#F3E5CD;margin-top:2px}
+.c6-tag{margin-top:8px;font-size:12.5px;letter-spacing:.2em;padding:5px 14px;border:1.5px dashed rgba(255,249,239,.6);border-radius:999px}
+.c6 .guest-block{margin:10px 0 auto}
+.c6 .script{color:#FFF9EF}
+.c6 .info dt{color:#EFE0C6}
+.c6 .map{margin-top:12px;border-color:rgba(255,249,239,.6)}
+/* ---------- host: the link maker ---------- */
+.grid>section:not(:nth-of-type(2)){display:none}
+.grid>section .pick{display:none}
+.send{max-width:760px;margin:22px auto 4px;padding:20px 22px;background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.send h2{margin:0 0 4px;font-size:17px;font-weight:700}
+.send p.lead{margin:0 0 14px;font-size:13px;color:var(--muted);line-height:1.6}
+.send .row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-end;margin-bottom:12px}
+.send label{display:flex;flex-direction:column;gap:5px;font-size:12px;letter-spacing:.1em;color:var(--muted)}
+.send select,.send textarea{font:inherit;font-size:14px;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.send textarea{width:100%;min-height:92px;resize:vertical;line-height:1.7}
+.send button{font:inherit;font-size:13.5px;padding:9px 18px;border-radius:999px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.send button.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.send button:focus-visible,.send select:focus-visible,.send textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.send ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.send li{display:flex;gap:10px;align-items:center}
+.send li .who{flex:none;min-width:82px;font-size:13.5px;font-weight:500}
+.send li input{flex:1;font:inherit;font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--muted)}
+.send .note{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.7}
+
+/* ---------- guest: just their card ---------- */
+body.solo{display:grid;place-items:center;min-height:100dvh;padding:14px}
+body.solo .bar,body.solo .hint,body.solo .send,body.solo .pick,body.solo .modal{display:none}
+body.solo .grid{display:block;padding:0;max-width:none;margin:0}
+body.solo main>section{display:none}
+body.solo main>section.on{display:block}
+body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16;margin:0 auto;cursor:default;box-shadow:0 20px 50px rgba(0,0,0,.28)}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important}}
+</style>
+
+<header class="bar">
+  <div class="brand"><strong>畇安週歲邀請卡</strong><span>樹咖啡 · 為每位朋友產生專屬連結</span></div>
+  <label class="field"><span>邀請對象姓名</span><input id="guest" value="Amber Lin" placeholder="輸入姓名，所有卡片一起換" autocomplete="off"></label>
+  <div class="chips" aria-label="快速填入">
+    <button type="button" data-n="Amber Lin">Amber Lin</button>
+    <button type="button" data-n="林小美">林小美</button>
+    <button type="button" data-n="小美 &amp; 阿明">小美 &amp; 阿明</button>
+    <button type="button" data-n="">清空</button>
+  </div>
+</header>
+
+
+<section class="send" hidden>
+  <h2>做給每位朋友的專屬連結</h2>
+  <p class="lead">把名字一行一個貼進來，按「產生連結」。每位朋友點開自己的連結，就會看到寫著他名字的邀請卡。</p>
+  <div class="row">
+    <input type="hidden" id="sendStyle" value="2">
+    <button id="makeLinks" type="button">產生連結</button>
+    <button id="copyAll" type="button" class="ghost">全部複製</button>
+  </div>
+  <textarea id="names" placeholder="一行一個名字&#10;林小美&#10;王大明&#10;小美 &amp; 阿明"></textarea>
+  <ul id="links"></ul>
+  <p class="note">要讓朋友打得開，先把這個頁面分享出去（右上角分享），再把下面的連結傳給他們。</p>
+</section>
+
+<main class="grid">
+
+<!-- 1 -->
+<section>
+  <div class="pick"><span class="num">1</span><span class="style-name">奶油氣球</span><span class="tag">溫柔 · 粉嫩</span></div>
+  <div class="slot scaler" tabindex="0" role="button" aria-label="放大第 1 款">
+    <div class="card c1">
+      <div class="c1-balloons" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="body stagger">
+        <p class="eyebrow">You're invited</p>
+        <div class="popout">
+          <div class="photo"><img class="ph" alt="侯畇安"></div>
+          <img class="arm" alt="">
+          <div class="grab food" aria-hidden="true"></div>
+        </div>
+        <h2 class="c1-one">ONE</h2>
+        <p class="c1-sub">侯畇安 的週歲派對</p>
+        <div class="guest-block">
+          <p class="dear">親愛的</p>
+          <p class="script"><span class="guest">Amber Lin</span></p>
+          <p class="dear">誠摯邀請您一同慶祝</p>
+        </div>
+        <dl class="info">
+          <div><dt>時間</dt><dd>9/28（一）14:00</dd></div>
+          <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
+          <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
+        </dl>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section>
+  <div class="pick"><span class="num">2</span><span class="style-name">樹咖啡</span><span class="tag">森林 · 手寫</span></div>
+  <div class="slot scaler" tabindex="0" role="button" aria-label="放大第 2 款">
+    <div class="card c2">
+      <div class="c2-frame" aria-hidden="true"></div>
+      <div class="leaves" aria-hidden="true"></div>
+      <svg class="c2-deco acorn" viewBox="0 0 30 34" aria-hidden="true">
+        <path d="M15 33c-5.4 0-9.4-5.2-9.4-11.4 0-4 4.2-6.1 9.4-6.1s9.4 2.1 9.4 6.1C24.4 27.8 20.4 33 15 33z" fill="#C08B4E"/>
+        <path d="M15 24c-2.6 2.4-3.6 5.4-3.4 8.4" stroke="#A2703A" stroke-width="1.2" fill="none"/>
+        <path d="M4.6 13.4c0-4.2 4.6-7.4 10.4-7.4s10.4 3.2 10.4 7.4c0 2.3-4.6 3.4-10.4 3.4S4.6 15.7 4.6 13.4z" fill="#7A5334"/>
+        <rect x="13.6" y="1" width="2.8" height="6" rx="1.4" fill="#7A5334"/>
+      </svg>
+      <svg class="c2-deco mush" viewBox="0 0 30 32" aria-hidden="true">
+        <path d="M3.6 14.2C3.6 8 8.7 3.6 15 3.6S26.4 8 26.4 14.2c0 2.2-2.4 3.2-11.4 3.2S3.6 16.4 3.6 14.2z" fill="#C1663D"/>
+        <circle cx="9.6" cy="10" r="2.1" fill="#FBF3E4"/><circle cx="18.6" cy="8" r="1.7" fill="#FBF3E4"/><circle cx="21.6" cy="13" r="1.4" fill="#FBF3E4"/>
+        <path d="M11 17.4h8l-1 11.4a3 3 0 0 1-6 0z" fill="#F2E6CE"/>
+      </svg>
+      <svg class="c2-deco pump" viewBox="0 0 34 30" aria-hidden="true">
+        <ellipse cx="17" cy="19" rx="14.6" ry="10.4" fill="#D98B45"/>
+        <ellipse cx="17" cy="19" rx="5.8" ry="10.4" fill="#E7A45F"/>
+        <path d="M17 8.6V4" stroke="#7A5334" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M17 5c2.2-3 6-2.8 7-0.6" stroke="#7FA36B" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+      </svg>
+      <svg class="c2-deco berry" viewBox="0 0 26 30" aria-hidden="true">
+        <path d="M13 29V13" stroke="#7A5334" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M13 18c-4-1-6-4-6-7 3 0 6 2 6 5" fill="#9DB08A"/>
+        <path d="M13 22c4-1 6-4 6-7-3 0-6 2-6 5" fill="#7E9A6E"/>
+        <circle cx="9" cy="7" r="4" fill="#C2503E"/><circle cx="17" cy="9" r="3.4" fill="#D96A4E"/>
+      </svg>
+      <svg class="c2-deco acorn2" viewBox="0 0 30 34" aria-hidden="true">
+        <path d="M15 33c-5.4 0-9.4-5.2-9.4-11.4 0-4 4.2-6.1 9.4-6.1s9.4 2.1 9.4 6.1C24.4 27.8 20.4 33 15 33z" fill="#C9A227"/>
+        <path d="M4.6 13.4c0-4.2 4.6-7.4 10.4-7.4s10.4 3.2 10.4 7.4c0 2.3-4.6 3.4-10.4 3.4S4.6 15.7 4.6 13.4z" fill="#7A5334"/>
+        <rect x="13.6" y="1" width="2.8" height="6" rx="1.4" fill="#7A5334"/>
+      </svg>
+      <svg class="c2-deco mush2" viewBox="0 0 30 32" aria-hidden="true">
+        <path d="M3.6 14.2C3.6 8 8.7 3.6 15 3.6S26.4 8 26.4 14.2c0 2.2-2.4 3.2-11.4 3.2S3.6 16.4 3.6 14.2z" fill="#D98B45"/>
+        <circle cx="10.6" cy="9.6" r="1.9" fill="#FBF3E4"/><circle cx="19.4" cy="11" r="1.5" fill="#FBF3E4"/>
+        <path d="M11 17.4h8l-1 11.4a3 3 0 0 1-6 0z" fill="#F2E6CE"/>
+      </svg>
+      <svg class="c2-deco acorn3" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 33c-5.4 0-9.4-5.2-9.4-11.4 0-4 4.2-6.1 9.4-6.1s9.4 2.1 9.4 6.1C24.4 27.8 20.4 33 15 33z" fill="#C08B4E"/><path d="M4.6 13.4c0-4.2 4.6-7.4 10.4-7.4s10.4 3.2 10.4 7.4c0 2.3-4.6 3.4-10.4 3.4S4.6 15.7 4.6 13.4z" fill="#7A5334"/><rect x="13.6" y="1" width="2.8" height="6" rx="1.4" fill="#7A5334"/></svg>
+      <svg class="c2-deco mush3" viewBox="0 0 30 32" aria-hidden="true"><path d="M3.6 14.2C3.6 8 8.7 3.6 15 3.6S26.4 8 26.4 14.2c0 2.2-2.4 3.2-11.4 3.2S3.6 16.4 3.6 14.2z" fill="#C1663D"/><circle cx="10.6" cy="9.6" r="1.9" fill="#FBF3E4"/><circle cx="19.4" cy="11" r="1.5" fill="#FBF3E4"/><path d="M11 17.4h8l-1 11.4a3 3 0 0 1-6 0z" fill="#F2E6CE"/></svg>
+      <svg class="c2-deco pump2" viewBox="0 0 34 30" aria-hidden="true"><ellipse cx="17" cy="19" rx="14.6" ry="10.4" fill="#D98B45"/><ellipse cx="17" cy="19" rx="5.8" ry="10.4" fill="#E7A45F"/><path d="M17 8.6V4" stroke="#7A5334" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <svg class="c2-deco berry2" viewBox="0 0 26 30" aria-hidden="true"><path d="M13 29V13" stroke="#7A5334" stroke-width="1.6" stroke-linecap="round"/><path d="M13 18c-4-1-6-4-6-7 3 0 6 2 6 5" fill="#9DB08A"/><path d="M13 22c4-1 6-4 6-7-3 0-6 2-6 5" fill="#7E9A6E"/><circle cx="9" cy="7" r="4" fill="#C2503E"/><circle cx="17" cy="9" r="3.4" fill="#D96A4E"/></svg>
+      <svg class="c2-deco acorn4" viewBox="0 0 30 34" aria-hidden="true"><path d="M15 33c-5.4 0-9.4-5.2-9.4-11.4 0-4 4.2-6.1 9.4-6.1s9.4 2.1 9.4 6.1C24.4 27.8 20.4 33 15 33z" fill="#C9A227"/><path d="M4.6 13.4c0-4.2 4.6-7.4 10.4-7.4s10.4 3.2 10.4 7.4c0 2.3-4.6 3.4-10.4 3.4S4.6 15.7 4.6 13.4z" fill="#7A5334"/><rect x="13.6" y="1" width="2.8" height="6" rx="1.4" fill="#7A5334"/></svg>
+      <svg class="c2-deco mush4" viewBox="0 0 30 32" aria-hidden="true"><path d="M3.6 14.2C3.6 8 8.7 3.6 15 3.6S26.4 8 26.4 14.2c0 2.2-2.4 3.2-11.4 3.2S3.6 16.4 3.6 14.2z" fill="#D98B45"/><circle cx="10.6" cy="9.6" r="1.9" fill="#FBF3E4"/><circle cx="19.4" cy="11" r="1.5" fill="#FBF3E4"/><path d="M11 17.4h8l-1 11.4a3 3 0 0 1-6 0z" fill="#F2E6CE"/></svg>
+      <div class="body stagger">
+        <svg class="c2-tree" viewBox="0 0 140 130" aria-hidden="true">
+          <rect x="64" y="84" width="12" height="42" rx="3" fill="#6B4F3A"/>
+          <g class="canopy">
+            <circle cx="70" cy="58" r="34" fill="#4F6B4A"/>
+            <circle cx="44" cy="70" r="24" fill="#9DB08A"/>
+            <circle cx="98" cy="68" r="26" fill="#7E9A6E"/>
+            <circle cx="70" cy="36" r="22" fill="#9DB08A"/>
+          </g>
+        </svg>
+        <div class="popout">
+          <div class="photo"><img class="ph" alt="侯畇安"></div>
+          <img class="arm" alt="">
+          <div class="grab food" aria-hidden="true"></div>
+        </div>
+        <p class="eyebrow">Invitation</p>
+        <h2>畇安 週歲</h2>
+        <p class="c2-sub">First Birthday Party</p>
+        <svg class="c2-div top" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><path d="M93 23c-4.3 0-7.5-4.1-7.5-9 0-3.2 3.4-4.8 7.5-4.8s7.5 1.6 7.5 4.8c0 4.9-3.2 9-7.5 9z" fill="#C9A227"/><path d="M85 9c0-3.3 3.6-5.8 8-5.8s8 2.5 8 5.8c0 1.8-3.6 2.7-8 2.7S85 10.8 85 9z" fill="#7A5334"/><rect x="91.9" y="0" width="2.2" height="4.6" rx="1.1" fill="#7A5334"/></g></svg>
+        <div class="guest-block">
+          <p class="dear">親愛的</p>
+          <p class="script"><span class="guest">Amber Lin</span></p>
+          <p class="dear">邀請您一起來喝杯咖啡、慶祝畇安一歲</p>
+        </div>
+        <svg class="c2-div bot" viewBox="0 0 186 24" aria-hidden="true"><g stroke="#BCC9AC" stroke-width="1.3" stroke-linecap="round" fill="none"><path d="M8 15C26 15 42 13 64 13"/><path d="M178 15C160 15 144 13 122 13"/></g><g fill="#9DB08A"><ellipse cx="26" cy="11" rx="5.2" ry="2.7" transform="rotate(-24 26 11)"/><ellipse cx="44" cy="17" rx="4.4" ry="2.3" transform="rotate(20 44 17)"/><ellipse cx="160" cy="11" rx="5.2" ry="2.7" transform="rotate(24 160 11)"/><ellipse cx="142" cy="17" rx="4.4" ry="2.3" transform="rotate(-20 142 17)"/></g><circle cx="56" cy="13" r="2.1" fill="#C9705A"/><circle cx="130" cy="13" r="2.1" fill="#C9705A"/><g class="sprig"><path d="M83.5 12.4c0-5.2 4.3-8.9 9.5-8.9s9.5 3.7 9.5 8.9c0 1.9-2 2.7-9.5 2.7s-9.5-.8-9.5-2.7z" fill="#C1663D"/><circle cx="88.4" cy="8.8" r="1.7" fill="#FBF3E4"/><circle cx="95.8" cy="7.4" r="1.4" fill="#FBF3E4"/><circle cx="98.4" cy="11.4" r="1.2" fill="#FBF3E4"/><path d="M89.6 15.1h6.8l-.9 7.1a2.5 2.5 0 0 1-5 0z" fill="#F2E6CE"/></g></svg>
+        <dl class="info">
+          <div><dt>時間</dt><dd>9/28（一）14:00</dd></div>
+          <div><dt>地點</dt><dd><span class="vn">樹瓅咖啡 st. tree cafe<span class="cup" aria-hidden="true"><i></i><i></i><i></i></span></span></dd></div>
+          <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
+        </dl>
+        <div class="cupline">
+          <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section>
+  <div class="pick"><span class="num">3</span><span class="style-name">抓周喜氣</span><span class="tag">紅金 · 傳統</span></div>
+  <div class="slot scaler" tabindex="0" role="button" aria-label="放大第 3 款">
+    <div class="card c3">
+      <div class="c3-band top" aria-hidden="true"></div><div class="c3-band bot" aria-hidden="true"></div>
+      <i class="lantern a" aria-hidden="true"></i><i class="lantern b" aria-hidden="true"></i>
+      <svg class="cloud a" viewBox="0 0 86 44" aria-hidden="true"><path d="M12 34 Q3 34 5 26 Q7 17 17 19 Q19 8 31 10 Q41 3 47 13 Q59 9 61 21 Q73 19 76 29 Q79 36 68 36 H14 Q10 36 12 34 Z M22 26 q4 -6 10 0" fill="none" stroke="#E3B85C" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="cloud b" viewBox="0 0 86 44" aria-hidden="true"><path d="M12 34 Q3 34 5 26 Q7 17 17 19 Q19 8 31 10 Q41 3 47 13 Q59 9 61 21 Q73 19 76 29 Q79 36 68 36 H14 Q10 36 12 34 Z M22 26 q4 -6 10 0" fill="none" stroke="#E3B85C" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body stagger">
+        <p class="eyebrow">誠摯邀請</p>
+        <div class="c3-hero">
+          <div class="popout">
+            <div class="photo"><img class="ph" alt="侯畇安"></div>
+            <img class="arm" alt="">
+            <div class="grab food" aria-hidden="true"></div>
+          </div>
+          <div class="seal" aria-label="畇安週歲"><span>畇</span><span>週</span><span>安</span><span>歲</span></div>
+        </div>
+        <h2>侯畇安 週歲之喜</h2>
+        <div class="c3-rule" aria-hidden="true"></div>
+        <div class="guest-block">
+          <p class="dear">敬邀</p>
+          <p class="script"><span class="guest">Amber Lin</span></p>
+          <p class="dear">闔家光臨，同沾喜氣</p>
+        </div>
+        <dl class="info">
+          <div><dt>時間</dt><dd>9/28（一）14:00</dd></div>
+          <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
+          <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
+        </dl>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <div class="pick"><span class="num">4</span><span class="style-name">藍白格紋</span><span class="tag">水彩 · 童趣</span></div>
+  <div class="slot scaler" tabindex="0" role="button" aria-label="放大第 4 款">
+    <div class="card c4">
+      <div class="c4-check" aria-hidden="true"></div>
+      <svg class="c4-bunting" viewBox="0 0 384 62" aria-hidden="true"><path d="M0 12 Q192 44 384 12" fill="none" stroke="#C9B79A" stroke-width="2"/><path d="M26 18L50 18L38 46Z" fill="#EFDFC0" stroke="#FFFFFF" stroke-width="1"/><path d="M65 22L89 22L77 50Z" fill="#C9DCEB" stroke="#FFFFFF" stroke-width="1"/><path d="M103 25L127 25L115 53Z" fill="#F3E7CE" stroke="#FFFFFF" stroke-width="1"/><path d="M142 27L166 27L154 55Z" fill="#A8C4DD" stroke="#FFFFFF" stroke-width="1"/><path d="M180 28L204 28L192 56Z" fill="#EFDFC0" stroke="#FFFFFF" stroke-width="1"/><path d="M218 27L242 27L230 55Z" fill="#C9DCEB" stroke="#FFFFFF" stroke-width="1"/><path d="M257 25L281 25L269 53Z" fill="#F3E7CE" stroke="#FFFFFF" stroke-width="1"/><path d="M295 22L319 22L307 50Z" fill="#A8C4DD" stroke="#FFFFFF" stroke-width="1"/><path d="M334 18L358 18L346 46Z" fill="#EFDFC0" stroke="#FFFFFF" stroke-width="1"/></svg>
+      <svg class="c4-cloud a" viewBox="0 0 80 40" aria-hidden="true"><path d="M14 32Q4 32 6 24 8 15 18 18 21 7 33 10 43 3 49 13 60 10 62 21 73 20 74 30 75 34 66 34H16Q12 34 14 32Z" fill="#EAF2F9" stroke="#C5D7E8" stroke-width="2"/></svg>
+      <svg class="c4-cloud b" viewBox="0 0 80 40" aria-hidden="true"><path d="M14 32Q4 32 6 24 8 15 18 18 21 7 33 10 43 3 49 13 60 10 62 21 73 20 74 30 75 34 66 34H16Q12 34 14 32Z" fill="#EAF2F9" stroke="#C5D7E8" stroke-width="2"/></svg>
+      <div class="body stagger">
+        <p class="eyebrow">Happy 1st Birthday</p>
+        <div class="popout">
+          <div class="photo"><img class="ph" alt="侯畇安"></div>
+          <img class="arm" alt="">
+          <div class="grab" aria-hidden="true"></div>
+        </div>
+        <h2>侯畇安</h2>
+        <p class="c4-sub">週歲派對</p>
+        <p class="c4-en">1st Birthday Party</p>
+        <div class="guest-block">
+          <p class="dear">親愛的</p>
+          <p class="script"><span class="guest">Amber Lin</span></p>
+          <p class="dear">誠摯邀請您一同慶祝</p>
+        </div>
+        <dl class="info">
+          <div><dt>時間</dt><dd>9/28（一）14:00</dd></div>
+          <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
+          <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
+        </dl>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section>
+  <div class="pick"><span class="num">5</span><span class="style-name">花圈</span><span class="tag">植物 · 優雅</span></div>
+  <div class="slot scaler" tabindex="0" role="button" aria-label="放大第 5 款">
+    <div class="card c5">
+      <div class="petals" aria-hidden="true"></div>
+      <div class="body stagger">
+        <p class="eyebrow">You are invited</p>
+        <div class="c5-hero">
+          <div class="wreath" aria-hidden="true"></div>
+        <div class="popout">
+          <div class="photo"><img class="ph" alt="侯畇安"></div>
+          <img class="arm" alt="">
+          <div class="grab" aria-hidden="true"></div>
+        </div>
+        </div>
+        <h2>侯畇安 週歲</h2>
+        <p class="c5-en">turns one</p>
+        <div class="c5-rule" aria-hidden="true"></div>
+        <div class="guest-block">
+          <p class="dear">親愛的</p>
+          <p class="script"><span class="guest">Amber Lin</span></p>
+          <p class="dear">邀請您與我們共度這一天</p>
+        </div>
+        <dl class="info">
+          <div><dt>時間</dt><dd>9/28（一）14:00</dd></div>
+          <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
+          <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
+        </dl>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section>
+  <div class="pick"><span class="num">6</span><span class="style-name">牛皮紙手繪</span><span class="tag">溫暖 · 手作</span></div>
+  <div class="slot scaler" tabindex="0" role="button" aria-label="放大第 6 款">
+    <div class="card c6">
+      <div class="c6-edge" aria-hidden="true"></div>
+      <svg class="c6-doodle d1" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 2l4 10 10 1-7.5 7 2 10L17 25l-8.5 5 2-10L3 13l10-1z"/></svg><svg class="c6-doodle d2" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 24C6 18 2 14 2 9a6 6 0 0 1 11-3 6 6 0 0 1 11 3c0 5-4 9-11 15z"/></svg><svg class="c6-doodle d3" viewBox="0 0 30 30" aria-hidden="true"><path d="M3 20c6-14 18-14 24 0M9 27c4-6 8-6 12 0"/></svg><svg class="c6-doodle d4" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/></svg>
+      <div class="body stagger">
+        <p class="eyebrow">FIRST BIRTHDAY</p>
+        <div class="popout">
+          <i class="c6-tape tl" aria-hidden="true"></i><i class="c6-tape tr" aria-hidden="true"></i>
+          <div class="photo"><img class="ph" alt="侯畇安"></div>
+          <img class="arm" alt="">
+          <div class="grab" aria-hidden="true"></div>
+        </div>
+        <h2>侯畇安 一歲</h2>
+        <p class="c6-en">thank you for coming</p>
+        <p class="c6-tag">一起來吃蛋糕</p>
+        <div class="guest-block">
+          <p class="dear">親愛的</p>
+          <p class="script"><span class="guest">Amber Lin</span></p>
+          <p class="dear">誠摯邀請您一同慶祝</p>
+        </div>
+        <dl class="info">
+          <div><dt>時間</dt><dd>9/28（一）14:00</dd></div>
+          <div><dt>地點</dt><dd>樹瓅咖啡 st. tree cafe</dd></div>
+          <div><dt>地址</dt><dd>新竹縣竹北市隘口三街22號</dd></div>
+        </dl>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=302新竹縣竹北市隘口三街22號" target="_blank" rel="noopener">查看地圖</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<p class="hint">下面是預覽。上面把名字貼進去，就能拿到每個人的專屬連結。</p>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-box">
+    <div class="stage scaler"></div>
+    <button type="button" class="close">關閉</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* PHOTO: replace with the real photo (data URI) once supplied */
+  var PHOTO='data:image/svg+xml;utf8,'+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#EADFCB'/><stop offset='1' stop-color='#CDBBA3'/></linearGradient></defs><rect width='300' height='400' fill='url(#g)'/><circle cx='190' cy='120' r='46' fill='#DCCBB2'/><text x='190' y='260' text-anchor='middle' font-size='20' fill='#7A6650' font-family='sans-serif'>畇安的照片</text></svg>");
+  /* ARM: transparent cut-out of the reaching arm, same pixel grid as PHOTO */
+  var ARM='';
+  document.querySelectorAll('.ph').forEach(function(i){i.src=PHOTO;});
+  document.querySelectorAll('.arm').forEach(function(i){if(ARM){i.src=ARM;}else{i.hidden=true;}});
+  /* what the hand reaches for — one treat per card, tuned to that card's palette */
+  var TREAT={
+    c1:'<svg viewBox="0 0 44 50"><rect x="20.6" y="4" width="2.8" height="10" rx="1.4" fill="#FFFFFF" stroke="#F2B8A0" stroke-width=".8"/><ellipse class="flame" cx="22" cy="3" rx="2.2" ry="3.2" fill="#F9C74F"/><path d="M6 26c-2-10 5-15 11-12 3-7 11-7 14 0 6-3 13 2 11 12z" fill="#FFF3DC" stroke="#EFC4A8" stroke-width="1.1"/><circle cx="14" cy="20" r="1.6" fill="#F2B8A0"/><circle cx="22" cy="16.5" r="1.6" fill="#B9C7A8"/><circle cx="30" cy="20" r="1.6" fill="#E9C9D4"/><path d="M7 26h30l-3.6 19a3 3 0 0 1-3 2.6H13.6a3 3 0 0 1-3-2.6z" fill="#E0866A"/><path d="M14 27.5v18M22 27.5v20M30 27.5v18" stroke="#C4644A" stroke-width="1.4" stroke-linecap="round"/></svg>',
+    c2:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#D3A265" stroke="#A97A44" stroke-width="1.6"/><circle cx="13" cy="14" r="2.2" fill="#5A3A22"/><circle cx="25" cy="11" r="2" fill="#5A3A22"/><circle cx="28" cy="23" r="2.4" fill="#5A3A22"/><circle cx="16" cy="26" r="2" fill="#5A3A22"/><circle cx="21" cy="19" r="1.5" fill="#5A3A22"/><circle cx="25" cy="30" r="1.6" fill="#5A3A22"/></svg>',
+    c3:'<svg viewBox="0 0 42 44"><path d="M21 42C8 42 3 31 5 21 7 12 15 9 21 15c6-6 14-3 16 6 2 10-3 21-16 21z" fill="#F6C1C7"/><path d="M21 15c3-4 8-6 12-3-5 2-9 6-12 12z" fill="#E8848F"/><path d="M21 17q-2 12 0 23" stroke="#E8848F" stroke-width="1.3" fill="none"/><path d="M20 13C14 5 7 7 4 12c6 3 11 2 16 1z" fill="#7FA36B"/></svg>',
+    c4:'<svg viewBox="0 0 42 42"><rect x="3" y="15" width="36" height="24" rx="3" fill="#FBF3E4" stroke="#D6C3A4" stroke-width="1.2"/><rect x="1" y="10" width="40" height="8" rx="2.5" fill="#FFFDF7" stroke="#D6C3A4" stroke-width="1.2"/><rect x="17.6" y="10" width="6.8" height="29" fill="#A8C4DD"/><path d="M21 10c-4-6-11-6-11-1 0 4 7 4 11 1zM21 10c4-6 11-6 11-1 0 4-7 4-11 1z" fill="#8FB3D3"/></svg>',
+    c5:'<svg viewBox="0 0 36 44"><path d="M18 42C8 42 3 33 4 25 5 17 11 13 18 13s13 4 14 12c1 8-4 17-14 17z" fill="#E4635B"/><path d="M18 13c-6 0-10 3-12 7 3-1 8-1 12 1 4-2 9-2 12-1-2-4-6-7-12-7z" fill="#F0847C" opacity=".65"/><g fill="#FBE9C8"><circle cx="12" cy="23" r="1.3"/><circle cx="20" cy="21" r="1.3"/><circle cx="26" cy="26" r="1.3"/><circle cx="15" cy="31" r="1.3"/><circle cx="23" cy="33" r="1.3"/><circle cx="18" cy="27" r="1.3"/></g><path d="M18 14c-5-1-9-4-9-7 4 0 7 1 9 3 2-2 5-3 9-3 0 3-4 6-9 7z" fill="#7E9A6E"/><rect x="16.8" y="2" width="2.4" height="6" rx="1.2" fill="#7E9A6E"/></svg>',
+    c6:'<svg viewBox="0 0 44 40"><ellipse cx="22" cy="35" rx="19" ry="4.5" fill="#8A6A45" opacity=".35"/><path d="M8 15h28l-3 17a4 4 0 0 1-4 3.4H15a4 4 0 0 1-4-3.4z" fill="#F6DFA8"/><path d="M8 15c0-4 6-7 14-7s14 3 14 7c0 3-6 5-14 5S8 18 8 15z" fill="#C98A3E"/><path d="M13 13c2-2 6-3 9-3" stroke="#E4B071" stroke-width="2" stroke-linecap="round" fill="none"/></svg>'
+  };
+  Object.keys(TREAT).forEach(function(k){
+    document.querySelectorAll('.'+k+' .grab').forEach(function(g){g.innerHTML=TREAT[k];});
+  });
+
+  var FALLBACK='貴賓';
+  var input=document.getElementById('guest');
+  var CJK=/[㐀-鿿豈-﫿぀-ヿ]/;
+  function setGuest(v){var t=(v||'').trim()||FALLBACK;
+    document.querySelectorAll('.guest').forEach(function(e){e.textContent=t;});
+    document.querySelectorAll('.script').forEach(function(e){e.classList.toggle('cjk',CJK.test(t));});}
+  input.addEventListener('input',function(e){setGuest(e.target.value);});
+  document.querySelectorAll('.chips button').forEach(function(b){b.addEventListener('click',function(){input.value=b.dataset.n;setGuest(b.dataset.n);});});
+
+
+  /* ---- two modes: a guest's own card, or the host's link maker ---- */
+  var qs = new URLSearchParams(location.search);
+  var guestName = qs.get('to');
+  var styleNo = Math.min(6, Math.max(1, parseInt(qs.get('s') || '2', 10) || 2));
+  var sections = document.querySelectorAll('main > section');
+
+  if (guestName) {
+    document.body.classList.add('solo');
+    sections[styleNo - 1].classList.add('on');
+    input.value = guestName;
+    setGuest(guestName);
+    document.title = guestName + '｜侯畇安 週歲派對邀請卡';
+  } else {
+    var panel = document.querySelector('.send');
+    panel.hidden = false;
+    var sel = document.getElementById('sendStyle');
+    var out = document.getElementById('links');
+    var rows = [];
+
+    function baseUrl(){ return location.origin + location.pathname; }
+    function build(){
+      var names = document.getElementById('names').value.split('\n')
+        .map(function(x){ return x.trim(); }).filter(Boolean);
+      out.innerHTML = ''; rows = [];
+      names.forEach(function(nm){
+        var url = baseUrl() + '?s=' + sel.value + '&to=' + encodeURIComponent(nm);
+        rows.push(nm + '\t' + url);
+        var li = document.createElement('li');
+        var who = document.createElement('span'); who.className = 'who'; who.textContent = nm;
+        var box = document.createElement('input'); box.readOnly = true; box.value = url;
+        box.addEventListener('focus', function(){ this.select(); });
+        var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = '複製';
+        btn.addEventListener('click', function(){
+          navigator.clipboard.writeText(url).then(function(){
+            btn.textContent = '已複製'; setTimeout(function(){ btn.textContent = '複製'; }, 1400);
+          });
+        });
+        li.append(who, box, btn); out.appendChild(li);
+      });
+      if (!names.length) { out.innerHTML = '<li><span class="who">還沒有名字</span></li>'; }
+    }
+    document.getElementById('makeLinks').addEventListener('click', build);
+    sel.addEventListener('change', function(){ if (rows.length) build(); });
+    document.getElementById('copyAll').addEventListener('click', function(){
+      if (!rows.length) build();
+      var b = this;
+      navigator.clipboard.writeText(rows.join('\n')).then(function(){
+        b.textContent = '已複製 ' + rows.length + ' 筆';
+        setTimeout(function(){ b.textContent = '全部複製'; }, 1600);
+      });
+    });
+  }
+
+  /* card 2's leaves drifting down */
+  var lv=document.querySelector('.c2 .leaves');
+  if(lv){var lcols=['#9DB08A','#7E9A6E','#B6C6A4','#C9B06A'];
+    for(var t=0;t<11;t++){var lf=document.createElement('i');lf.className='leaf';
+      lf.style.cssText='--x:'+(Math.random()*100).toFixed(1)+'%;--w:'+(11+Math.random()*10).toFixed(1)+'px;'
+        +'--lc:'+lcols[t%4]+';--d:'+(13+Math.random()*10).toFixed(1)+'s;--dl:'+(-Math.random()*22).toFixed(1)+'s;'
+        +'--sway:'+(Math.random()*70-30).toFixed(0)+'px';
+      lv.appendChild(lf);}}
+
+  /* card 5's wreath and drifting petals */
+  var wr=document.querySelector('.c5 .wreath');
+  if(wr){var g='<svg viewBox="0 0 200 200">',i,a,col;
+    for(i=0;i<28;i++){a=i/28*360;col=(i%3===0)?'#C9DCC0':(i%3===1)?'#9FB88E':'#7E9A6E';
+      g+='<ellipse cx="100" cy="12" rx="6" ry="13.5" fill="'+col+'" transform="rotate('+a.toFixed(1)+' 100 100) rotate('+((i%2)?20:-20)+' 100 12)"/>';}
+    [24,132,258].forEach(function(d){g+='<g transform="rotate('+d+' 100 100)"><circle cx="100" cy="12" r="7.5" fill="#E8B7B0"/><circle cx="100" cy="12" r="2.8" fill="#F8EBD5"/></g>';});
+    wr.innerHTML=g+'</svg>';}
+  var pet=document.querySelector('.c5 .petals');
+  if(pet){for(var q=0;q<12;q++){var pl=document.createElement('i');pl.className='c5-petal';
+    pl.style.cssText='left:'+(Math.random()*100).toFixed(1)+'%;--d:'+(11+Math.random()*8).toFixed(1)+'s;--dl:'+(-Math.random()*18).toFixed(1)+'s';
+    pet.appendChild(pl);}}
+
+  /* scale each 360x640 card to its slot */
+  var ro=new ResizeObserver(function(es){es.forEach(function(e){e.target.style.setProperty('--s',(e.contentRect.width/360).toFixed(4));});});
+  document.querySelectorAll('.slot').forEach(function(sl){ro.observe(sl);});
+
+  /* zoom modal */
+  var modal=document.getElementById('modal'),stage=modal.querySelector('.stage');
+  function fit(){var sc=Math.min((innerHeight-110)/640,(innerWidth-40)/360,1.3);stage.style.width=(360*sc)+'px';stage.style.height=(640*sc)+'px';stage.style.setProperty('--s',sc.toFixed(4));}
+  function openModal(slot){stage.innerHTML='';stage.appendChild(slot.querySelector('.card').cloneNode(true));fit();modal.hidden=false;document.body.style.overflow='hidden';modal.querySelector('.close').focus();}
+  function closeModal(){modal.hidden=true;stage.innerHTML='';document.body.style.overflow='';}
+  if(!guestName) document.querySelectorAll('.slot').forEach(function(sl){
+    sl.addEventListener('click',function(e){if(e.target.closest('a'))return;openModal(sl);});
+    sl.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openModal(sl);}});
+  });
+  modal.addEventListener('click',function(e){if(e.target===modal||e.target.closest('.close'))closeModal();});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)closeModal();});
+  addEventListener('resize',function(){if(!modal.hidden)fit();});
+})();
+</script>
