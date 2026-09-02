@@ -4,7 +4,7 @@
 <title>畇安週歲邀請卡</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Playfair+Display:ital,wght@0,600;1,500&family=Bricolage+Grotesque:wght@800&family=DM+Serif+Display:ital@0;1&family=Dancing+Script:wght@600&family=Great+Vibes&family=Allura&family=Pacifico&family=Long+Cang&family=Ma+Shan+Zheng&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Playfair+Display:ital,wght@0,600;1,500&family=Bricolage+Grotesque:wght@800&family=DM+Serif+Display:ital@0;1&family=Dancing+Script:wght@600&family=Great+Vibes&family=Allura&family=Pacifico&family=Long+Cang&family=Iansui&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
 <style>
 /* ---------- page shell (theme-aware) ---------- */
 :root{--bg:#F6F3EC;--surface:#FFFFFF;--ink:#24211B;--muted:#77705F;--line:#E3DDD0;--accent:#3F6B5C;--accent-ink:#FFFFFF;--shadow:0 18px 40px rgba(60,50,30,.16)}
@@ -50,7 +50,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',s
 .dear{font-size:13px;letter-spacing:.12em}
 .script{font-family:'Dancing Script','LXGW WenKai TC',cursive;font-size:40px;line-height:1.2;font-weight:600;padding:2px 10px 0}
 /* chinese names get 楷體 — handwritten but fully legible, not 草書 */
-.script.cjk{font-family:'Ma Shan Zheng','LXGW WenKai TC',serif;font-size:38px;font-weight:400;letter-spacing:.1em;line-height:1.3;padding-top:2px}
+.script.cjk{font-family:'Iansui','LXGW WenKai TC',serif;font-size:37px;font-weight:400;letter-spacing:.14em;line-height:1.3;padding-top:3px}
 .info{margin:0;display:grid;gap:9px;width:100%}
 .info>div{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:baseline;text-align:left}
 .info dt{font-size:10.5px;letter-spacing:.22em;color:var(--label)}
@@ -110,12 +110,15 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',s
 .c2 .grab{left:84.5px;top:165.4px;width:35.2px;height:35.2px}
 .c2-frame{position:absolute;inset:14px;border:1.5px solid #4F6B4A;border-radius:16px;pointer-events:none;z-index:1}
 .c2-frame::after{content:"";position:absolute;inset:5px;border:1px solid rgba(79,107,74,.45);border-radius:12px}
-.c2-deco{position:absolute;z-index:1;pointer-events:none;animation:c2bob 4.4s ease-in-out infinite alternate}
-.c2-deco.acorn{left:46px;top:26px;width:27px}
-.c2-deco.mush{right:48px;top:24px;width:27px;animation-delay:-1.4s}
-.c2-deco.pump{left:96px;top:64px;width:29px;animation-delay:-2.6s}
-.c2-deco.berry{right:98px;top:62px;width:24px;animation-delay:-3.4s}
-@keyframes c2bob{from{translate:0 0;rotate:-3deg}to{translate:0 -5px;rotate:3deg}}
+.c2-deco{position:absolute;z-index:1;pointer-events:none;transform:rotate(var(--tilt,0deg));
+  animation:c2bob var(--bd,4.4s) ease-in-out infinite alternate;animation-delay:var(--bdl,0s)}
+.c2-deco.acorn{left:32px;top:62px;width:33px;--tilt:-15deg;--bd:5.2s}
+.c2-deco.berry{left:96px;top:22px;width:21px;--tilt:13deg;--bd:3.8s;--bdl:-1.1s}
+.c2-deco.mush{right:34px;top:28px;width:29px;--tilt:9deg;--bd:4.6s;--bdl:-2.3s}
+.c2-deco.pump{right:104px;top:92px;width:23px;--tilt:-7deg;--bd:6.1s;--bdl:-3.7s}
+.c2-deco.acorn2{right:60px;top:126px;width:17px;--tilt:24deg;--bd:4.1s;--bdl:-0.6s;opacity:.85}
+.c2-deco.mush2{left:64px;top:150px;width:15px;--tilt:-19deg;--bd:5.5s;--bdl:-2.9s;opacity:.8}
+@keyframes c2bob{from{translate:0 0;rotate:-2.5deg}to{translate:0 -6px;rotate:2.5deg}}
 .c2-tree{width:48px;height:44px;display:block}
 .c2-tree .canopy{transform-box:fill-box;transform-origin:50% 100%;animation:c2sway 5s ease-in-out infinite alternate}
 @keyframes c2sway{from{rotate:-2.5deg}to{rotate:2.5deg}}
@@ -368,6 +371,16 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
         <path d="M13 18c-4-1-6-4-6-7 3 0 6 2 6 5" fill="#9DB08A"/>
         <path d="M13 22c4-1 6-4 6-7-3 0-6 2-6 5" fill="#7E9A6E"/>
         <circle cx="9" cy="7" r="4" fill="#C2503E"/><circle cx="17" cy="9" r="3.4" fill="#D96A4E"/>
+      </svg>
+      <svg class="c2-deco acorn2" viewBox="0 0 30 34" aria-hidden="true">
+        <path d="M15 33c-5.4 0-9.4-5.2-9.4-11.4 0-4 4.2-6.1 9.4-6.1s9.4 2.1 9.4 6.1C24.4 27.8 20.4 33 15 33z" fill="#C9A227"/>
+        <path d="M4.6 13.4c0-4.2 4.6-7.4 10.4-7.4s10.4 3.2 10.4 7.4c0 2.3-4.6 3.4-10.4 3.4S4.6 15.7 4.6 13.4z" fill="#7A5334"/>
+        <rect x="13.6" y="1" width="2.8" height="6" rx="1.4" fill="#7A5334"/>
+      </svg>
+      <svg class="c2-deco mush2" viewBox="0 0 30 32" aria-hidden="true">
+        <path d="M3.6 14.2C3.6 8 8.7 3.6 15 3.6S26.4 8 26.4 14.2c0 2.2-2.4 3.2-11.4 3.2S3.6 16.4 3.6 14.2z" fill="#D98B45"/>
+        <circle cx="10.6" cy="9.6" r="1.9" fill="#FBF3E4"/><circle cx="19.4" cy="11" r="1.5" fill="#FBF3E4"/>
+        <path d="M11 17.4h8l-1 11.4a3 3 0 0 1-6 0z" fill="#F2E6CE"/>
       </svg>
       <div class="body stagger">
         <svg class="c2-tree" viewBox="0 0 140 130" aria-hidden="true">
