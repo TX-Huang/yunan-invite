@@ -791,7 +791,7 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
     gsap.set(s('.legL, .legR'), { transformOrigin: '50% 0%' });
     gsap.set(s('.armB'), { transformOrigin: '100% 0%' });
     gsap.set(s('.armF'), { transformOrigin: '0% 0%' });
-    gsap.set(s('.head, .torso, .hat'), { transformOrigin: '50% 100%' });
+    gsap.set(s('.head, .torso, .hat, .bob'), { transformOrigin: '50% 100%' });
     return s;
   }
 
@@ -808,9 +808,12 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
       gsap.set(s('.armF'), { rotate: UP_F, scale: UP_LEN });
       gsap.set(s('.torso'), { rotate: 3 });          // 扛重物的前傾
       gsap.to(s('.bob'), { y: -1.1, duration: step / 2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      gsap.fromTo(s('.bob'), { rotate: -3 }, { rotate: 3, duration: step, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     } else {
       legs.to(s('.armF'), { rotate: -32 }, 0).to(s('.armB'), { rotate: 32 }, 0);
-      gsap.to(s('.bob'), { y: -1.7, duration: 0.125, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      gsap.to(s('.bob'), { y: -2.1, duration: step / 2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      /* 左右大幅搖晃，走起來笨笨的 */
+      gsap.fromTo(s('.bob'), { rotate: -7 }, { rotate: 7, duration: step, repeat: -1, yoyo: true, ease: 'sine.inOut' });
       gsap.to(s('.torso'), { scaleY: 0.95, scaleX: 1.04, duration: 0.125, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     }
     gsap.to(s('.hat'), { rotate: -6, duration: 0.5, repeat: -1, yoyo: true, ease: 'sine.inOut' });
@@ -938,8 +941,11 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
       gsap.set(real, { x: -46, y: 0, scaleX: 1, autoAlpha: 0 });
       walkLoop(real);
       tl.set(real, { autoAlpha: 1 }, r.at)
-        .to(real, { x: 16, duration: 1.5, ease: 'none' }, r.at)
-        .add(function () { patrol(real, r.i, 16); }, r.at + 1.5);
+        .to(real, { x: 16, duration: 1.8, ease: 'none' }, r.at)
+        /* 半路絆一下，站穩再繼續 */
+        .to(real, { y: -4, duration: 0.16, yoyo: true, repeat: 1, ease: 'power2.out' }, r.at + 0.75)
+        .to(real, { rotate: -9, duration: 0.14, yoyo: true, repeat: 1, ease: 'power1.inOut' }, r.at + 0.95)
+        .add(function () { patrol(real, r.i, 16); }, r.at + 1.8);
     });
 
     tl.to(q('.c2-frame'), { autoAlpha: 1, duration: 0.7 }, 0.15)
