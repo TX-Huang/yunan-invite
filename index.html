@@ -4,7 +4,7 @@
 <title>畇安週歲邀請卡</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Playfair+Display:ital,wght@0,600;1,500&family=Bricolage+Grotesque:wght@800&family=DM+Serif+Display:ital@0;1&family=Dancing+Script:wght@600&family=Great+Vibes&family=Allura&family=Pacifico&family=Long+Cang&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Playfair+Display:ital,wght@0,600;1,500&family=Bricolage+Grotesque:wght@800&family=DM+Serif+Display:ital@0;1&family=Dancing+Script:wght@600&family=Great+Vibes&family=Allura&family=Pacifico&family=Long+Cang&family=Ma+Shan+Zheng&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Serif+TC:wght@500;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
 <style>
 /* ---------- page shell (theme-aware) ---------- */
 :root{--bg:#F6F3EC;--surface:#FFFFFF;--ink:#24211B;--muted:#77705F;--line:#E3DDD0;--accent:#3F6B5C;--accent-ink:#FFFFFF;--shadow:0 18px 40px rgba(60,50,30,.16)}
@@ -50,7 +50,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',s
 .dear{font-size:13px;letter-spacing:.12em}
 .script{font-family:'Dancing Script','LXGW WenKai TC',cursive;font-size:40px;line-height:1.2;font-weight:600;padding:2px 10px 0}
 /* chinese names get 楷體 — handwritten but fully legible, not 草書 */
-.script.cjk{font-family:'LXGW WenKai TC','Noto Serif TC',serif;font-size:31px;font-weight:700;letter-spacing:.12em;line-height:1.35;padding-top:4px}
+.script.cjk{font-family:'Ma Shan Zheng','LXGW WenKai TC',serif;font-size:38px;font-weight:400;letter-spacing:.1em;line-height:1.3;padding-top:2px}
 .info{margin:0;display:grid;gap:9px;width:100%}
 .info>div{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:baseline;text-align:left}
 .info dt{font-size:10.5px;letter-spacing:.22em;color:var(--label)}
@@ -110,6 +110,12 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',s
 .c2 .grab{left:84.5px;top:165.4px;width:35.2px;height:35.2px}
 .c2-frame{position:absolute;inset:14px;border:1.5px solid #4F6B4A;border-radius:16px;pointer-events:none;z-index:1}
 .c2-frame::after{content:"";position:absolute;inset:5px;border:1px solid rgba(79,107,74,.45);border-radius:12px}
+.c2-deco{position:absolute;z-index:1;pointer-events:none;animation:c2bob 4.4s ease-in-out infinite alternate}
+.c2-deco.acorn{left:46px;top:26px;width:27px}
+.c2-deco.mush{right:48px;top:24px;width:27px;animation-delay:-1.4s}
+.c2-deco.pump{left:96px;top:64px;width:29px;animation-delay:-2.6s}
+.c2-deco.berry{right:98px;top:62px;width:24px;animation-delay:-3.4s}
+@keyframes c2bob{from{translate:0 0;rotate:-3deg}to{translate:0 -5px;rotate:3deg}}
 .c2-tree{width:48px;height:44px;display:block}
 .c2-tree .canopy{transform-box:fill-box;transform-origin:50% 100%;animation:c2sway 5s ease-in-out infinite alternate}
 @keyframes c2sway{from{rotate:-2.5deg}to{rotate:2.5deg}}
@@ -340,6 +346,29 @@ body.solo .slot{width:min(94vw,calc((100dvh - 28px) * 0.5625));aspect-ratio:9/16
     <div class="card c2">
       <div class="c2-frame" aria-hidden="true"></div>
       <div class="leaves" aria-hidden="true"></div>
+      <svg class="c2-deco acorn" viewBox="0 0 30 34" aria-hidden="true">
+        <path d="M15 33c-5.4 0-9.4-5.2-9.4-11.4 0-4 4.2-6.1 9.4-6.1s9.4 2.1 9.4 6.1C24.4 27.8 20.4 33 15 33z" fill="#C08B4E"/>
+        <path d="M15 24c-2.6 2.4-3.6 5.4-3.4 8.4" stroke="#A2703A" stroke-width="1.2" fill="none"/>
+        <path d="M4.6 13.4c0-4.2 4.6-7.4 10.4-7.4s10.4 3.2 10.4 7.4c0 2.3-4.6 3.4-10.4 3.4S4.6 15.7 4.6 13.4z" fill="#7A5334"/>
+        <rect x="13.6" y="1" width="2.8" height="6" rx="1.4" fill="#7A5334"/>
+      </svg>
+      <svg class="c2-deco mush" viewBox="0 0 30 32" aria-hidden="true">
+        <path d="M3.6 14.2C3.6 8 8.7 3.6 15 3.6S26.4 8 26.4 14.2c0 2.2-2.4 3.2-11.4 3.2S3.6 16.4 3.6 14.2z" fill="#C1663D"/>
+        <circle cx="9.6" cy="10" r="2.1" fill="#FBF3E4"/><circle cx="18.6" cy="8" r="1.7" fill="#FBF3E4"/><circle cx="21.6" cy="13" r="1.4" fill="#FBF3E4"/>
+        <path d="M11 17.4h8l-1 11.4a3 3 0 0 1-6 0z" fill="#F2E6CE"/>
+      </svg>
+      <svg class="c2-deco pump" viewBox="0 0 34 30" aria-hidden="true">
+        <ellipse cx="17" cy="19" rx="14.6" ry="10.4" fill="#D98B45"/>
+        <ellipse cx="17" cy="19" rx="5.8" ry="10.4" fill="#E7A45F"/>
+        <path d="M17 8.6V4" stroke="#7A5334" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M17 5c2.2-3 6-2.8 7-0.6" stroke="#7FA36B" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+      </svg>
+      <svg class="c2-deco berry" viewBox="0 0 26 30" aria-hidden="true">
+        <path d="M13 29V13" stroke="#7A5334" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M13 18c-4-1-6-4-6-7 3 0 6 2 6 5" fill="#9DB08A"/>
+        <path d="M13 22c4-1 6-4 6-7-3 0-6 2-6 5" fill="#7E9A6E"/>
+        <circle cx="9" cy="7" r="4" fill="#C2503E"/><circle cx="17" cy="9" r="3.4" fill="#D96A4E"/>
+      </svg>
       <div class="body stagger">
         <svg class="c2-tree" viewBox="0 0 140 130" aria-hidden="true">
           <rect x="64" y="84" width="12" height="42" rx="3" fill="#6B4F3A"/>
